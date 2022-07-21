@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0px 20px;
+  font-family: 'Poppins' !important; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 100px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.tox-notification {
+  display: none !important;
+}
+
+.tox-statusbar__branding {
+  display: none !important;
+}
+
+.tox-statusbar__path-item {
+  display: none !important;
+}
