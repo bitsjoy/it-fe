@@ -1,8 +1,7 @@
-import { AimOutlined, ExclamationCircleFilled, FolderFilled, FolderOutlined, FormOutlined, FundProjectionScreenOutlined, LaptopOutlined, MoreOutlined, ProfileOutlined, StepForwardOutlined, TableOutlined, ToolFilled, ToolOutlined} from '@ant-design/icons'
+ 
 import { Col, Dropdown, Row } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { productName } from '../productInfo'
+import { Link } from 'react-router-dom' 
 import { btnBackgroundColor } from '../uiConfig'
 
 export default function NavigationBar() {
