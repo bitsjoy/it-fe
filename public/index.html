@@ -445,6 +445,11 @@ _.A("google.accounts.oauth2.hasGrantedAnyScope",function(a){var b=Hn.apply(1,arg
                   .catch((err) => console.log('Failure: ', err));
           })
       }
+
+      history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
       
   </script>
     <!--

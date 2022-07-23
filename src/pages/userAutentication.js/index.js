@@ -8,6 +8,7 @@ import jwt_decode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { btnBackgroundColor } from '../../uiConfig';
 import { imgHome } from '../../assets';  
+import Footer from '../../components/Footer';
 
 export default function UserAuthentication() {
  
@@ -37,6 +38,7 @@ export default function UserAuthentication() {
     axios.post(API_BASE + '/api/auth/doesemailexist', {
         email: credentialsObject.email
     }).then(res => {
+        console.log(res + "kkkk");
         toast.error('Account already exists, please login with email and password');
         setAuthType(0);
     }).catch((err) => {
@@ -129,18 +131,18 @@ export default function UserAuthentication() {
                                 "email": email,
                                 "password": password
                             }).then(res => { 
-                                // console.log(res);
+                                console.log(res.data); 
+                                if(res.data.token){
                                 localStorage.setItem(bearer_token_key, res.data.token);
                                 localStorage.setItem("bitsjoy_email", res.data.email);
                                 localStorage.setItem("bitsjoy_name", res.data.fullName);
                                 localStorage.setItem("bitsjoy_pp_image", res.data.ppImageLink);
                                 localStorage.setItem("bitsjoy_userId", res.data.userId);
-                        setLoading(false);
-
-                            }).then(()=>{
-                               // history('/onboarding');
                                window.location.reload();
-
+                                } else {
+                                toast.error("something went wrong!");
+                                }
+                        setLoading(false);
                             }).catch(err => {
                                 toast.error(err);
                         setLoading(false);
@@ -184,13 +186,13 @@ export default function UserAuthentication() {
                 
                 <span id="signinButtonDiv" style={{display: `${authType == 0 ? 'inline-block' : 'none'}`, marginLeft: '20px', transform: 'translate(0px, 13px)'}}></span>
 
-
                 </div> 
             </Col>
             <Col xs={{span: 0}} md={{span: 16}} align="center">
                 <img src={imgHome} style={{marginRight: '0px', width :'45%'}} alt="Loading ..."/>
             </Col>
         </Row>
+        <Footer />
     </>
   )
 }

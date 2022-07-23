@@ -67,7 +67,7 @@ export default function Home() {
 
   cover={<img alt="writer" style={{width: '60%', margin: 'auto'}}  src={writer} />}
 >
-  <Card.Meta title="WRITER" description="All-in-one tool for writing a book, organise your thoughts efficiently" />
+  <Card.Meta title="NEW HABIT" description="All-in-one tool for writing a book, organise your thoughts efficiently" />
 </Card>
       </Col>
 

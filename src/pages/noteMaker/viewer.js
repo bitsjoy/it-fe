@@ -9,9 +9,9 @@ import { btnBackgroundColor } from '../../uiConfig'
 
 export default function Viewer(props) {
   return (
-    <div style={{ display: '', border: `0px solid ${btnBackgroundColor}`, borderRight: '0px', borderLeft: '0px', backgroundColor: '#F8F8F8', padding: '20px', margin: '20px', marginTop: '0px'}} align="left">
+    <div style={{ overflowY: 'auto', display: '', border: `0px solid ${btnBackgroundColor}`, borderRight: '0px', borderLeft: '0px', backgroundColor: '#F8F8F8', padding: '20px', margin: '20px', marginTop: '0px'}} align="left">
             <Row>
-                <Col span={12}><span style={{paddingRight: '20px', paddingBottom: '5px', borderBottom: `2px solid ${btnBackgroundColor}`, fontSize: '17px'}}>{props.title}</span></Col>
+                <Col span={12}><span style={{paddingRight: '20px', paddingBottom: '5px', fontSize: '17px'}}>{props.title}</span></Col>
             <Col span={12} align="right">
             <CloseOutlined size="large" onClick={props.close} style={{position: 'revert', right: '0px'}} />
             

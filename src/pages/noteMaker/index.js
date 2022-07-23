@@ -13,6 +13,9 @@ import { btnBackgroundColor } from '../../uiConfig';
 
 
 export default function NoteMaker() {
+    var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const [currentBookEditable, setCurrentBookEditable ] = useState(true);
  
    const [ currentNoteId, setCurrentNoteId] = useState(null);
    const [ currentNoteTitle, setCurrentNoteTitle] = useState(null);
@@ -163,9 +166,10 @@ const editorRef = useRef(null);
   return ( 
     <>
       <Row id="lp" align="center">
-        <Col xs={{span: 0}} md={{span: 18}}>
+        <Col xs={{span: 24}} md={{span: 18}}>
             {
-                edit && <div align="right">
+                edit && <div align="left">
+                    Note Title:
                 <Input required type="text" value={currentNoteTitle} onChange={(e)=>{
                     setCurrentNoteTitle(e.target.value.trim() == "" ? null : e.target.value);
                }} style={{fontWeight: '700'}} />
@@ -179,19 +183,64 @@ const editorRef = useRef(null);
                    // alert("FAFAFAF");
                     setEditorLoaded(true);
                   }}
-                  init={{ 
-                    height: 500,
+                  init={{
+                    selector: 'textarea#full-featured',
+                    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+                    tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
+                    tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
+                    tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
+                    tinydrive_google_drive_client_id: 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+                    mobile: {
+                      plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+                    },
+                    menu: {
+                      tc: {
+                        title: 'Comments',
+                        items: 'addcomment showcomments deleteallconversations'
+                      }
+                    }, 
                     menubar: false,
-                    plugins: [
-                      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                      'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+                    autosave_ask_before_unload: true,  
+                    autosave_restore_when_empty: false,
+                    autosave_retention: '2m',
+                    image_advtab: true,
+                    link_list: [
+                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
                     ],
-                    toolbar: 'undo redo | ' +
-                      'bold italic forecolor | alignleft aligncenter ' +
-                      'alignright alignjustify | bullist numlist outdent indent | ' +
-                      'removeformat | help',
-                    content_style: 'body {font-weight: 300; font-size:14px;}'
+                    image_list: [
+                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                    ],
+                    image_class_list: [
+                      { title: 'None', value: '' },
+                      { title: 'Some class', value: 'class-name' }
+                    ],
+                    importcss_append: true,
+                    templates: [
+                          { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+                      { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+                      { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+                    ],
+                    template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+                    height: 600,
+                    image_caption: true,
+                    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                    noneditable_noneditable_class: 'mceNonEditable',
+                    toolbar_mode: 'sliding',
+                    spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+                    tinycomments_mode: 'embedded',
+                    content_style: 'body {font-weight: 300; font-size:14px;}',
+                    contextmenu: 'link image imagetools table configurepermanentpen',
+                    a11y_advanced_options: true, 
+                    /*
+                    The following settings require more configuration than shown here.
+                    For information on configuring the mentions plugin, see:
+                    https://www.tiny.cloud/docs/plugins/premium/mentions/.
+                    */ 
+                    mentions_item_type: 'profile'
                   }}
                 />  
               </div>
@@ -200,14 +249,16 @@ const editorRef = useRef(null);
 
 {
                 newNoteWindow && <div align="left">
-                Collection Name: <Input id="collectionName" type="text" value={currentBook} onChange={(e)=>{
+                {currentBookEditable && <> Collection Name: <Input id="collectionName" type="text" value={currentBook} onChange={(e)=>{
                    
                     let val = e.target.value.toString().toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase());
                     setCurrentBook(val.trim() == "" ? null : val);
-                }} style={{fontWeight: '700', textTransform: 'capitalize'}} /> 
+                }} style={{fontWeight: '700', textTransform: 'capitalize'}} />    <br/>
+                <br/></> }
+              
+                {!currentBookEditable && <span style={{borderBottom: `1px solid ${btnBackgroundColor}`}}> Adding note to {currentBook}    <br/>
+               <br/></span> }
                 
-                    <br/>
-                <br/>
                 Note Title : <Input type="text" value={currentNoteTitle} onChange={(e)=>{
                     let val = e.target.value.toString().toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase());
                     setCurrentNoteTitle(val.trim() == "" ? null : val);
@@ -222,19 +273,64 @@ const editorRef = useRef(null);
                     // alert("FAFAFAF");
                      setEditorLoaded(true);
                    }}
-                  init={{ 
-                    height: 500,
+                  init={{
+                    selector: 'textarea#full-featured',
+                    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+                    tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
+                    tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
+                    tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
+                    tinydrive_google_drive_client_id: 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+                    mobile: {
+                      plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+                    },
+                    menu: {
+                      tc: {
+                        title: 'Comments',
+                        items: 'addcomment showcomments deleteallconversations'
+                      }
+                    }, 
                     menubar: false,
-                    plugins: [
-                      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                      'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+                    autosave_ask_before_unload: true,  
+                    autosave_restore_when_empty: false,
+                    autosave_retention: '2m',
+                    image_advtab: true,
+                    link_list: [
+                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
                     ],
-                    toolbar: 'undo redo | ' +
-                      'bold italic forecolor | alignleft aligncenter ' +
-                      'alignright alignjustify | bullist numlist outdent indent | ' +
-                      'removeformat | help',
-                    content_style: 'body {font-weight: 300; font-size:14px;}'
+                    image_list: [
+                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                    ],
+                    image_class_list: [
+                      { title: 'None', value: '' },
+                      { title: 'Some class', value: 'class-name' }
+                    ],
+                    importcss_append: true,
+                    templates: [
+                          { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+                      { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+                      { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+                    ],
+                    template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+                    height: 600,
+                    image_caption: true,
+                    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                    noneditable_noneditable_class: 'mceNonEditable',
+                    toolbar_mode: 'sliding',
+                    spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+                    tinycomments_mode: 'embedded',
+                    content_style: 'body {font-weight: 300; font-size:14px;}',
+                    contextmenu: 'link image imagetools table configurepermanentpen',
+                    a11y_advanced_options: true, 
+                    /*
+                    The following settings require more configuration than shown here.
+                    For information on configuring the mentions plugin, see:
+                    https://www.tiny.cloud/docs/plugins/premium/mentions/.
+                    */ 
+                    mentions_item_type: 'profile',
                   }}
                 />  
               </div> 
@@ -244,31 +340,32 @@ const editorRef = useRef(null);
                 !edit && currentNoteId && <><Viewer close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
             }
             {
-                !currentNoteId && currentNoteId != "" && <div style={{paddingTop: '20px'}}><img src={noteMaker} style={{width: '30%'}} alt="noteMaker" />
+                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img src={noteMaker} style={{width: '50%', border: '0px solid black'}} alt="noteMaker" />
                 <br/>
                 <br/>
-                <br/>
-                <br/>
-                <br/>
-                <ButtonPrimary text={<span> <PlusCircleOutlined /> New collection </span>} onClick={()=>{ setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample Note'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
+                <br/> 
+                <ButtonPrimary text={<span> <PlusCircleOutlined /> New collection </span>} onClick={()=>{ setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
     }}></ButtonPrimary>
-                
+                <br/>
+                <br/>
+                <br/>
+                <br/> 
                 </div>
             }
              
         </Col>
         
-        <Col style={{overflowY: 'scroll', height: '75vh'}} xs={{span: 0}} md={{span: 6}} align="center">
+        <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 24}} md={{span: 6}} align="center">
             
         {!edit && !newNoteWindow && <div align="left"><h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
         
         <br/> 
-        <Collapse style={{fontWeight: '700', width: '100%',  border: '0px',}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
+        <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
             {
                 notes ? Object.keys(notes).length !== 0 ? Object.keys(notes).map((Key, i) => {
                     return notes[Key].find(x => x.deleted !== true) ? <Collapse.Panel style={{border: `0px solid silver`, borderBottom: '0px'}} header={Key} key={i}>
                         <div align="left">
-        <Button type="link" style={{border: `0px solid ${btnBackgroundColor}`, color: 'black'}} onClick={()=>{setNewNoteWindow(true); setCurrentNoteId(""); setCurrentBook(Key); setCurrentNoteTitle(null)}}><span> 
+        <Button type="link" style={{border: `0px solid ${btnBackgroundColor}`, color: 'black'}} onClick={()=>{setNewNoteWindow(true); setCurrentNoteId(""); setCurrentBook(Key); setCurrentNoteTitle('type here'); setCurrentBookEditable(false);}}><span> 
             <span onMouseOver={()=>{
            // document.getElementById('addMoreNotes').style.display = 'inline';
         }}
@@ -344,7 +441,7 @@ const editorRef = useRef(null);
         <br/>
 <br/>
 <Button type="link" onClick={()=>{ 
-   if(window.confirm("are you sure? Unsaved changes will be lost") == true) window.location.reload();
+     window.location.reload();
 }} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button></>
     }
 
@@ -353,7 +450,7 @@ const editorRef = useRef(null);
 <br/>
 <br/>
 <Button type="link" onClick={()=>{ 
-   if(window.confirm("are you sure? Unsaved changes will be lost") == true) window.location.reload();
+  window.location.reload();
 }} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button>
 
 
