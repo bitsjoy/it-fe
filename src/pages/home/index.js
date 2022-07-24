@@ -1,5 +1,5 @@
 import { Row, Col, Card } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { diary, noteMaker, time, writer } from '../../assets'
 
@@ -18,19 +18,44 @@ export default function Home() {
     marginBottom: '50px',
     fontWeight: '700'
   }
+
+  const onclick = () => {
+    if(window.innerHeight > window.innerWidth){
+      for( let i = 0; i<=4 ; i++){
+        if(i%2 == 1){
+          document.getElementById(`home-${i}`).style.transform = 'translate(200vw, 0px)';
+        } else {
+          document.getElementById(`home-${i}`).style.transform = 'translate(-200vw, 0px)';
+        }
+      }
+    } else {
+      for( let i = 0; i<=4 ; i++){
+        if(i%2 == 1){
+          document.getElementById(`home-${i}`).style.transform = 'translate(0px, 200vh)';
+        } else {
+          document.getElementById(`home-${i}`).style.transform = 'translate(0px, -200vh)';
+        }
+      }
+    }
+   
+    // document.getElementById(x).style.borderRadius = '50%';
+  }
+
   return (
-    <div style={{minHeight: '100vh'}}>
+    <div id="apps-home" style={{minHeight: '100vh'}}>
       <br/>
       {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
-      <div align="center" style={{fontFamily: 'Italianno', fontSize: '45px'}}>Tool kit</div>
+      <div align="center" id="home-0" style={{fontFamily: 'Italianno', fontSize: '45px'}}>Tool kit</div>
 <br/>
       <Row>
         <br/>
-
-        <Col xs={{span: '24'}} md={{span: '6'}} align="center"> 
+        <Col id="home-1"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
         <Card
-        onClick={()=>{
-          navigate('/notes')
+        onClick={(e)=>{
+          onclick();
+          setTimeout(()=>{
+            navigate('/notes')
+          }, 500)
         }}
     hoverable
     style={{...CardStyle, paddingTop: '35px'}}
@@ -44,7 +69,7 @@ export default function Home() {
  
 
 
-<Col xs={{span: '24'}} md={{span: '6'}} align="center"> 
+<Col id="home-2" xs={{span: '24'}} md={{span: '6'}} align="center"> 
 
 <Card
   hoverable
@@ -59,7 +84,7 @@ export default function Home() {
 
 
 
-      <Col xs={{span: '24'}} md={{span: '6'}}> 
+      <Col id="home-3" xs={{span: '24'}} md={{span: '6'}}> 
 
 <Card
   hoverable
@@ -75,8 +100,7 @@ export default function Home() {
 
 
 
-        <Col xs={{span: '24'}} md={{span: '6'}}> 
-
+        <Col id="home-4" xs={{span: '24'}} md={{span: '6'}}>  
   <Card
     hoverable
     style={{...CardStyle, paddingTop: '28px'}}
@@ -85,6 +109,7 @@ export default function Home() {
   >
     <Card.Meta title="TIME MANAGER" description="Small changes are often underestimated" />
   </Card>
+
         </Col>
       </Row>
       <br/>

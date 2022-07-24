@@ -73,3 +73,7 @@ textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: #6A5ACD;
 }
+
+* {
+  transition: transform 1s;
+}

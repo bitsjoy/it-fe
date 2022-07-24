@@ -14,6 +14,8 @@ import { bearer_token_key } from './localStorageConfig';
 import Footer from './components/Footer';
 import Profile from './pages/profilePage';
 import NoteMaker from './pages/noteMaker';
+import FooterMenu from './components/FooterMenu';
+import VerifyOneTime from './pages/verifyOneTimePayment';
 
 function App() {
   return (
@@ -33,7 +35,9 @@ function App() {
           <Route path='/notes' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <NoteMaker />}></Route>
           <Route path='/editorview' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <NoteMaker />}></Route>
           {/* <Route path='/onboarding' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <OnBoarding/>}></Route> */}
-        </Routes>
+          <Route path='/verifyonetimepayment/:x' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <VerifyOneTime />}></Route>
+
+        </Routes> 
       </Router>
     </div>
   );

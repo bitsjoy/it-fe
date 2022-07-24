@@ -4,23 +4,25 @@ import React, { useEffect, useRef, useState } from 'react';
 import Viewer from './viewer';
 import { Editor } from '@tinymce/tinymce-react';
 import ButtonPrimary from '../../components/Button';
-import { BackwardFilled, BackwardOutlined, CloseSquareOutlined, DeleteOutlined, EditOutlined, FileAddOutlined, FolderAddOutlined, FolderAddTwoTone, LoadingOutlined, PlusCircleOutlined, PlusOutlined, PlusSquareOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
+import {  DeleteOutlined, EditOutlined, LoadingOutlined, PlusCircleOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
 import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from './../../localStorageConfig';
 import { toast } from 'react-toastify';
 import { noteMaker } from '../../assets';
 import { btnBackgroundColor } from '../../uiConfig';
+import Fee from './fee';
 
 
-export default function NoteMaker() {
-    var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+export default function NoteMaker() { 
 
-    const [currentBookEditable, setCurrentBookEditable ] = useState(true);
  
-   const [ currentNoteId, setCurrentNoteId] = useState(null);
-   const [ currentNoteTitle, setCurrentNoteTitle] = useState(null);
-   const [ currentBook, setCurrentBook] = useState(null);
-   const [ currentNoteBody, setCurrentNoteBody] = useState("<p>No content, edit note to add content</p>");
+
+  const [currentBookEditable, setCurrentBookEditable ] = useState(true);
+ 
+  const [ currentNoteId, setCurrentNoteId] = useState(null);
+  const [ currentNoteTitle, setCurrentNoteTitle] = useState(null);
+  const [ currentBook, setCurrentBook] = useState(null);
+  const [ currentNoteBody, setCurrentNoteBody] = useState("<p>No content, edit note to add content</p>");
 
   const [ edit, setEdit ] = useState(false);
   const [notes, setNotes ] = useState(null);
@@ -32,9 +34,52 @@ export default function NoteMaker() {
   const [ deleteNoteProcess, setDeleteNoteProcess ] = useState(false);
   const [ editorLoaded, setEditorLoaded ] = useState(false);
 
+  const [ userHasAccess, setUserHasAccess ] = useState(null);
 
+  const editorRef = useRef(null);
+
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    
+    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+    script.async = true;
+    script.setAttribute('data-payment_button_id' , "pl_JxBuBqoSa0PGbf");
+ 
+
+    if(document.getElementById('rz_form')) document.getElementById('rz_form').appendChild(script); 
+
+
+    return () => { 
+
+    }
+  }, [userHasAccess]);
+
+  
      
-const editorRef = useRef(null);
+
+  useEffect(() => {
+    axios.post(API_BASE + '/api/user/getUserOwnedProducts', {
+      email: localStorage.getItem('bitsjoy_email'),
+      // paymentId: "pay_JxGlP9laUhy2wW",
+      // product: "Notes"
+  },{ 
+    headers : {
+    'Authorization' : localStorage.getItem(bearer_token_key),
+    'Content-Type': 'application/json'
+}}).then(res => {
+  console.log(res);
+      if(res.data.ownedProducts.includes("Notes")){
+        setUserHasAccess(true);
+ // window.location.reload();
+
+      } else {
+        setUserHasAccess(false);
+      }
+}).catch((err) => {
+  toast.error('err.response.message');
+})
+  }, [])
 
   useEffect(()=>{
     //alert("1");
@@ -92,6 +137,9 @@ const editorRef = useRef(null);
 
 
   const saveNote = () => {
+    if(currentBook == null || currentNoteTitle == null){
+      alert("collection-name and note-title are empty");
+    } else {
     console.log(editorRef.current.getContent());
     setSavingNoteProcess(true);
     const date = new Date();
@@ -127,10 +175,14 @@ const editorRef = useRef(null);
 
       })
     }
+  }
   };
 
 
   const updateNote = () => {
+    if(currentBook == null || currentNoteTitle == null){
+      alert("Note-title is empty");
+    } else {
     setUpdatingNoteProcess(true);
     const date = new Date();
     if (editorRef.current) {
@@ -160,15 +212,26 @@ const editorRef = useRef(null);
 
       })
     }
+  }
   };
  
 
   return ( 
-    <>
+    <>{
+      userHasAccess === true ?  
       <Row id="lp" align="center">
         <Col xs={{span: 24}} md={{span: 18}}>
             {
                 edit && <div align="left">
+                {currentBookEditable && <> Collection Name: <Input id="collectionName" type="text" value={currentBook} onChange={(e)=>{
+                   
+                   let val = e.target.value.toString().toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase());
+                   setCurrentBook(val.trim() == "" ? null : val);
+               }} style={{fontWeight: '700', textTransform: 'capitalize'}} />    <br/>
+               <br/></> }
+             
+               {!currentBookEditable && <span style={{borderBottom: `1px solid ${btnBackgroundColor}`}}> {currentBook}    <br/>
+              <br/></span> }
                     Note Title:
                 <Input required type="text" value={currentNoteTitle} onChange={(e)=>{
                     setCurrentNoteTitle(e.target.value.trim() == "" ? null : e.target.value);
@@ -340,12 +403,18 @@ const editorRef = useRef(null);
                 !edit && currentNoteId && <><Viewer close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
             }
             {
-                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img src={noteMaker} style={{width: '50%', border: '0px solid black'}} alt="noteMaker" />
+                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img id="notes-hero" src={noteMaker} style={{width: '50%', border: '0px solid black'}} alt="noteMaker" />
                 <br/>
                 <br/>
-                <br/> 
-                <ButtonPrimary text={<span> <PlusCircleOutlined /> New collection </span>} onClick={()=>{ setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
-    }}></ButtonPrimary>
+                <br/>  
+                <ButtonPrimary styl={{fontSize: '15px'}} id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
+                  document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                  document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
+                  setTimeout(()=>{
+                    setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
+
+                  }, 500);
+    }}></ButtonPrimary> 
                 <br/>
                 <br/>
                 <br/>
@@ -354,9 +423,134 @@ const editorRef = useRef(null);
             }
              
         </Col>
+
+
+
+
+
+
+
+
+
+
         
-        <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 24}} md={{span: 6}} align="center">
+        <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 0}} md={{span: 6}} align="center">
             
+        {!edit && !newNoteWindow && <div align="left"><h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
+        
+        <br/> 
+        <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
+            {
+                notes ? Object.keys(notes).length !== 0 ? Object.keys(notes).map((Key, i) => {
+                    return notes[Key].find(x => x.deleted !== true) ? <Collapse.Panel style={{border: `0px solid silver`, borderBottom: '0px'}} header={Key} key={i}>
+                        <div align="left">
+        <Button type="link" style={{border: `0px solid ${btnBackgroundColor}`, color: 'black'}} onClick={()=>{setNewNoteWindow(true); setCurrentNoteId(""); setCurrentBook(Key); setCurrentNoteTitle('type here'); setCurrentBookEditable(false);}}><span> 
+            <span onMouseOver={()=>{
+           // document.getElementById('addMoreNotes').style.display = 'inline';
+        }}
+        onMouseOut={()=>{
+           // document.getElementById('addMoreNotes').style.display = 'none';
+        }}
+        ><PlusCircleOutlined /> Add more</span> &nbsp; </span></Button>
+<br/> 
+                        {
+                            notes[Key].map(note => {
+                                return    <> 
+                                <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: btnBackgroundColor,
+                                overflow: 'hidden', textOverflow: 'ellipsis'}} onClick={()=>{
+                                    // fetch note and set the variables in state with the returned data
+                                  
+                                    console.log(Key.toString(), note.noteId, note.noteTitle);
+                                    setCurrentBook(Key.toString()); setCurrentNoteTitle(note.noteTitle); setCurrentNoteId(note.noteId);
+                                }} type="link">{note.noteTitle}</Button> 
+                                &nbsp;
+                                {
+                                    currentNoteId === note.noteId && <><EditOutlined  title="edit"  onClick={()=>{
+                                        // setCurrentBook(Key.toString()); setCurrentNoteTitle(note.noteTitle); setCurrentNoteId(note.noteId); setCurrentNoteBody("lolpoo");
+                                        setEdit(true);
+                                        setCurrentBookEditable(false);
+                                    }}/>
+                                &nbsp;
+                                &nbsp;
+
+                                    <DeleteOutlined title="delete" style={{fontSize:''}} onClick={()=>{
+                                        setDeleteNoteProcess(true);
+                if(window.confirm("Are you sure you want to delete this note?")){
+                    axios.put(API_BASE+ '/api/notes/deleteNote', { 
+                        "authorId": localStorage.getItem('bitsjoy_userId'), 
+                        "bookTitle": currentBook,
+                        "noteId": currentNoteId
+                      },
+                      {
+                        headers : {
+                            'Authorization' : localStorage.getItem(bearer_token_key),
+                            'Content-Type': 'application/json'
+                        }
+                      }).then((res)=>{
+                        console.log(res);
+                        setDeleteNoteProcess(false);
+                        window.location.reload();
+                   // setUpdatingNoteProcess(false);
+                      }).catch(err => {  
+                        toast.error(err.message);
+                    // setUpdatingNoteProcess(false);
+                    setDeleteNoteProcess(false);
+                
+                      })
+                }
+            }}/> {
+                deleteNoteProcess ? <SyncOutlined spin /> : null
+            }
+                                    </>
+                                 }
+                                 <br/>
+                                {/* <DeleteOutlined style={{position: 'absolute', right: '5px'}}/> */}
+                                </> 
+                            })
+                        }
+
+
+                        </div>
+                    </Collapse.Panel> : null
+                }) : "" : <SyncOutlined spin />
+            }
+    </Collapse></div>}
+
+    {
+        edit && <><br/><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
+        <br/>
+<br/>
+<Button type="link" onClick={()=>{ 
+  window.scrollTo(0,0);
+     window.location.reload();
+}} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button></>
+    }
+
+{
+        newNoteWindow && <><br/><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
+<br/>
+<br/>
+<Button type="link" onClick={()=>{ 
+  window.scrollTo(0,0);
+
+  window.location.reload();
+}} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button>
+
+
+</>
+    }
+        </Col>
+
+
+
+
+
+
+
+
+
+
+        <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 24}} md={{span: 0}} align="left">
         {!edit && !newNoteWindow && <div align="left"><h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
         
         <br/> 
@@ -436,28 +630,67 @@ const editorRef = useRef(null);
             }
     </Collapse></div>}
 
-    {
-        edit && <><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
-        <br/>
-<br/>
-<Button type="link" onClick={()=>{ 
-     window.location.reload();
-}} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button></>
+
+          </Col>
+
+
+
+
+
+
+<Row>
+        <Col xs={{span: 24}} md={{span: 0}} align="center">
+            <div style={{position: 'fixed', bottom: '10px', right: '20px'}}>
+            {
+        edit && <><ButtonPrimary styl={{width: '100%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
+        
+</>
     }
 
 {
-        newNoteWindow && <><br/><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
-<br/>
-<br/>
-<Button type="link" onClick={()=>{ 
-  window.location.reload();
-}} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Back to library</Button>
+        newNoteWindow && <>
+        
+        <ButtonPrimary style={{display: 'inline'}}  styl={{width: '100%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
+
+
 
 
 </>
     }
-        </Col>
+            </div>
+
+            <div style={{position: 'fixed', bottom: '10px', left: '20px'}}>
+
+{ edit &&  <Button type="link" onClick={()=>{ 
+  window.scrollTo(0,0);
+     window.location.reload();
+}} style={{color: btnBackgroundColor}}><StepBackwardOutlined /> Close</Button>}
+
+
+
+           
+
+            {
+        newNoteWindow && <>
+        <Button type="link" onClick={()=>{ 
+  window.scrollTo(0,0);
+
+  window.location.reload();
+}} style={{color: btnBackgroundColor, padding: '0px'}}><StepBackwardOutlined /> Close</Button>
+   
+
+
+</>
+    }
+            </div>
+</Col>
+</Row>
       </Row>
+      : userHasAccess === false ? 
+      <div>
+        <Fee />
+      </div> : <LoadingOutlined />
+  }
     </> 
   )
 }
