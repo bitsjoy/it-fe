@@ -13,7 +13,7 @@ export default function NavigationBar() {
                 {/* <sub> &nbsp;bitsjoy </sub> */}
             </Col>
             <Col span={12} align="right">
-            {localStorage.getItem("bitsjoy_pp_image") && <Link title="Profile page" to="/profile"> <img src={localStorage.getItem("bitsjoy_pp_image")} style={{width: '40px', borderRadius: '50%', marginRight: '20px', border: '2px solid white'}} alt="PP" /> </Link>}
+            {localStorage.getItem("bitsjoy_pp_image") && <Link title="Profile page" to="/profile"> <img src={localStorage.getItem("bitsjoy_pp_image")} style={{width: '40px', borderRadius: '50%', marginRight: '20px', border: '2px solid goldenrod'}} alt="PP" /> </Link>}
                 {/* <AimOutlined onClick={()=>{
                     localStorage.clear();
                     window.location.reload();
