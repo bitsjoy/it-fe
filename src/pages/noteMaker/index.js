@@ -1,23 +1,27 @@
-import { Col, Row, Collapse, Button, Input } from 'antd';
+import { Col, Row, Collapse, Button, Input, Modal } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import Viewer from './viewer';
 import { Editor } from '@tinymce/tinymce-react';
 import ButtonPrimary from '../../components/Button';
-import {  DeleteOutlined, EditOutlined, LoadingOutlined, PlusCircleOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
+import {  DeleteOutlined, EditOutlined, LoadingOutlined, PlusCircleOutlined, ShareAltOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
 import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from './../../localStorageConfig';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { noteMaker } from '../../assets';
 import { btnBackgroundColor } from '../../uiConfig';
 import Fee from './fee';
 
 
 export default function NoteMaker() { 
-
  
+  let noteHTMLCharacterLimit = 1000000;
 
   const [currentBookEditable, setCurrentBookEditable ] = useState(true);
+
+  const [ sharing, setSharing ] = useState(false);
+  const [share, setShare ] = useState(false); 
+  const [shareWithEmail, setShareWithEmail ] = useState("");
  
   const [ currentNoteId, setCurrentNoteId] = useState(null);
   const [ currentNoteTitle, setCurrentNoteTitle] = useState(null);
@@ -38,8 +42,9 @@ export default function NoteMaker() {
 
   const editorRef = useRef(null);
 
+  
 
-  useEffect(() => {
+  useEffect(() => { 
     const script = document.createElement('script');
     
     script.src = "https://checkout.razorpay.com/v1/payment-button.js";
@@ -77,9 +82,11 @@ export default function NoteMaker() {
         setUserHasAccess(false);
       }
 }).catch((err) => {
-  toast.error('err.response.message');
+  toast.error(err.response.data.message);
 })
   }, [])
+
+  
 
   useEffect(()=>{
     //alert("1");
@@ -120,12 +127,13 @@ export default function NoteMaker() {
             'Content-Type': 'application/json'
         }
     }).then((res)=>{
-        setCurrentNoteBody(res.data.body)
+      console.log(res.data);
+        setCurrentNoteBody(res.data.body);
     setLoadingNoteBody(false);
 
       //  alert(res.data.body);
     }).catch((err)=>{
-        toast.error(err.message);
+    toast.error(err.response.data.message);
     setLoadingNoteBody(false);
 
     })}
@@ -137,8 +145,15 @@ export default function NoteMaker() {
 
 
   const saveNote = () => {
+    // console.log(editorRef.current.getContent().length);
+    if(editorRef.current.getContent().length > noteHTMLCharacterLimit){
+      toast.error("Reduce content of the file");
+      document.getElementById('word_limit_reached').style.display = 'block';
+
+    } else {
+
     if(currentBook == null || currentNoteTitle == null){
-      alert("collection-name and note-title are empty");
+      toast.error("collection-name and note-title are empty");
     } else {
     console.log(editorRef.current.getContent());
     setSavingNoteProcess(true);
@@ -176,10 +191,18 @@ export default function NoteMaker() {
       })
     }
   }
+}
   };
 
 
   const updateNote = () => {
+     console.log(editorRef.current.getContent().length);
+
+    if(editorRef.current.getContent().length > noteHTMLCharacterLimit){
+      toast.error("Reduce content of the file");
+      document.getElementById('word_limit_reached').style.display = 'block';
+
+    } else {
     if(currentBook == null || currentNoteTitle == null){
       alert("Note-title is empty");
     } else {
@@ -212,14 +235,21 @@ export default function NoteMaker() {
 
       })
     }
-  }
+  }}
   };
  
 
   return ( 
-    <>{
+    <>
+     <Row>
+          <Col span={24}>
+            <h3 id="word_limit_reached" style={{display: 'none', backgroundColor: '#FF9494', color: 'white'}}>Word limit reached</h3>
+          </Col>
+        </Row>
+    {
       userHasAccess === true ?  
       <Row id="lp" align="center">
+       
         <Col xs={{span: 24}} md={{span: 18}}>
             {
                 edit && <div align="left">
@@ -236,23 +266,34 @@ export default function NoteMaker() {
                 <Input required type="text" value={currentNoteTitle} onChange={(e)=>{
                     setCurrentNoteTitle(e.target.value.trim() == "" ? null : e.target.value);
                }} style={{fontWeight: '700'}} />
-                <br/>
-                <br/>
+                <br/> 
+                <ShareAltOutlined onClick={()=>{setShare(true)}} style={{fontSize: '22px'}} />
+                <br/> 
+                <br/> 
                 { !editorLoaded && <><SyncOutlined spin />&nbsp; &nbsp; Loading editor ...<br/><br/></>}
                 <Editor  
                   onInit={(evt, editor) => editorRef.current = editor}
                   initialValue={currentNoteBody}
+                  onChange={(e)=>{
+                    console.log(noteHTMLCharacterLimit);
+                    if(editorRef.current.getContent().length > noteHTMLCharacterLimit){
+                      document.getElementById('word_limit_reached').style.display = 'block';
+                    } else {
+                      document.getElementById('word_limit_reached').style.display = 'none';
+                    }
+                  }}
                   onLoadContent={()=>{
                    // alert("FAFAFAF");
                     setEditorLoaded(true);
-                  }}
-                  init={{
+                  }} 
+                  init={{  
+                    init_instance_callback: function (editor) {
+                      document.querySelector('.tox-statusbar__wordcount').click();
+                   },
                     selector: 'textarea#full-featured',
                     plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
-                    tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
-                    tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
-                    tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
-                    tinydrive_google_drive_client_id: 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+                  
+                    tinydrive_max_image_dimension: 100,
                     mobile: {
                       plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
                     },
@@ -267,28 +308,17 @@ export default function NoteMaker() {
                     autosave_ask_before_unload: true,  
                     autosave_restore_when_empty: false,
                     autosave_retention: '2m',
-                    image_advtab: true,
-                    link_list: [
-                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
-                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
-                    ],
-                    image_list: [
-                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
-                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
-                    ],
-                    image_class_list: [
-                      { title: 'None', value: '' },
-                      { title: 'Some class', value: 'class-name' }
-                    ],
+                     
+                    image_advtab: false, 
                     importcss_append: true,
                     templates: [
                           { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
                       { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
                       { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
                     ],
+                    height: 500,
                     template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-                    height: 600,
+                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]', 
                     image_caption: true,
                     quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
                     noneditable_noneditable_class: 'mceNonEditable',
@@ -304,13 +334,14 @@ export default function NoteMaker() {
                     https://www.tiny.cloud/docs/plugins/premium/mentions/.
                     */ 
                     mentions_item_type: 'profile'
+                  
                   }}
                 />  
               </div>
             }
 
 
-{
+            {
                 newNoteWindow && <div align="left">
                 {currentBookEditable && <> Collection Name: <Input id="collectionName" type="text" value={currentBook} onChange={(e)=>{
                    
@@ -332,17 +363,30 @@ export default function NoteMaker() {
                 <Editor  
                   onInit={(evt, editor) => editorRef.current = editor}
                   initialValue={currentNoteBody}
+                  onChange={(e)=>{
+                    console.log(noteHTMLCharacterLimit);
+                    if(editorRef.current.getContent().length > noteHTMLCharacterLimit){
+                      document.getElementById('word_limit_reached').style.display = 'block';
+                    } else {
+                      document.getElementById('word_limit_reached').style.display = 'none';
+                    }
+                  }}
                   onLoadContent={()=>{
                     // alert("FAFAFAF");
                      setEditorLoaded(true);
                    }}
-                  init={{
+                   init={{ 
+                    init_instance_callback: function (editor) {
+                      document.querySelector('.tox-statusbar__wordcount').click();   
+                   },
                     selector: 'textarea#full-featured',
                     plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
                     tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
                     tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
                     tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
                     tinydrive_google_drive_client_id: 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+                    tinydrive_max_image_dimension: 100,
+
                     mobile: {
                       plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
                     },
@@ -352,24 +396,14 @@ export default function NoteMaker() {
                         items: 'addcomment showcomments deleteallconversations'
                       }
                     }, 
+                    height: 500,
+
                     menubar: false,
                     toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
                     autosave_ask_before_unload: true,  
                     autosave_restore_when_empty: false,
                     autosave_retention: '2m',
-                    image_advtab: true,
-                    link_list: [
-                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
-                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
-                    ],
-                    image_list: [
-                      { title: 'My page 1', value: 'https://www.tiny.cloud' },
-                      { title: 'My page 2', value: 'http://www.moxiecode.com' }
-                    ],
-                    image_class_list: [
-                      { title: 'None', value: '' },
-                      { title: 'Some class', value: 'class-name' }
-                    ],
+                    image_advtab: true,  
                     importcss_append: true,
                     templates: [
                           { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
@@ -377,8 +411,7 @@ export default function NoteMaker() {
                       { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
                     ],
                     template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-                    height: 600,
+                    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]', 
                     image_caption: true,
                     quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
                     noneditable_noneditable_class: 'mceNonEditable',
@@ -403,7 +436,7 @@ export default function NoteMaker() {
                 !edit && currentNoteId && <><Viewer close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
             }
             {
-                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img id="notes-hero" src={noteMaker} style={{width: '50%', border: '0px solid black'}} alt="noteMaker" />
+                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img id="notes-hero" src={noteMaker} style={{width: '40%', border: '0px solid black'}} alt="noteMaker" />
                 <br/>
                 <br/>
                 <br/>  
@@ -689,8 +722,65 @@ export default function NoteMaker() {
       : userHasAccess === false ? 
       <div>
         <Fee />
-      </div> : <LoadingOutlined />
+      </div> : <span style={{width: '100%', position: 'relative', top: '37vh'}}><SyncOutlined spin style={{fontSize: '25px'}} /></span>
   }
+
+<Modal title="Share with" visible={share} onOk={()=>{}} onCancel={()=>{setShare(false)}}
+
+footer={[
+  <Button key="back" onClick={() => {setShare(false);}}>
+    Cancel
+  </Button>,
+   
+]}>
+
+       Enter Email :
+       <Input value={shareWithEmail} onChange={(e)=>{
+        setShareWithEmail(e.target.value);
+       }} id="shareWithEmail" type="email" ></Input>
+
+<br/>
+          
+       <ButtonPrimary text={sharing ? <SyncOutlined spin /> : 'Share' } onClick={()=>{
+        let k = document.getElementById('shareWithEmail').value;
+        if(k.includes('@') && k.includes('.') && !k.trim().includes(' ')){
+        setSharing(true);
+
+        // let currentShareWith = shareWith;
+        // if(!currentShareWith.includes(k)){ 
+        setShareWithEmail("");
+
+        axios.put(API_BASE + '/api/notes/updateNoteAccessibleTo', {
+          noteId: currentNoteId,
+          authorId: localStorage.getItem('bitsjoy_userId'),
+          list: [k]
+      },{
+          headers : {
+              'Authorization' : localStorage.getItem(bearer_token_key),
+              'Content-Type': 'application/json'
+          }
+      }).then((res)=>{
+        console.log(res.data);
+        setShare(false);
+        toast.success('Shared successfully');
+        setSharing(false); 
+    
+        //  alert(res.data.body);
+      }).catch((err)=>{
+          toast.error(err.response.data.message);
+          setSharing(false); 
+    
+    
+    
+      })
+        // }
+        } else {
+          toast.error('Please provide a valid email');
+        }
+        }}>
+        </ButtonPrimary>
+        
+      </Modal>
     </> 
   )
 }

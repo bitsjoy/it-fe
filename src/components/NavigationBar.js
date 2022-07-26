@@ -1,4 +1,5 @@
  
+import { AppstoreOutlined, HomeOutlined } from '@ant-design/icons'
 import { Col, Dropdown, Row } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom' 
@@ -7,9 +8,9 @@ import { btnBackgroundColor } from '../uiConfig'
 export default function NavigationBar() {
   return (
     <>
-        <Row style={{paddingTop: '13px', paddingBottom: '5px',  paddingLeft: '0px', position: 'fixed', width: '100vw', backgroundColor: btnBackgroundColor, zIndex: '9', left: '0px', color: 'white', fontFamily: 'raleway'}}> 
+        <Row style={{paddingTop: '13px', paddingBottom: '5px',  paddingLeft: '0px', position: 'fixed', width: '100vw', backgroundColor: 'white', zIndex: '9', left: '0px', color: 'white', fontFamily: 'raleway'}}> 
             <Col span={12} align="left">
-            <Link title="Profile page" to="/"><h2 style={{ backgroundColor: 'white', color: btnBackgroundColor, textShadow: '0px 0px black', display: 'inline-block', padding: '0px 20px' }}>Bitsjoy</h2></Link>
+            <Link title="Profile page" to="/"><AppstoreOutlined style={{color: btnBackgroundColor, fontSize: '30px', paddingLeft: '20px'}}/><span style={{color: btnBackgroundColor}}>Bitsjoy</span> </Link>
                 {/* <sub> &nbsp;bitsjoy </sub> */}
             </Col>
             <Col span={12} align="right">

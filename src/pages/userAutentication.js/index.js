@@ -7,8 +7,9 @@ import { bearer_token_key } from '../../localStorageConfig';
 import jwt_decode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { btnBackgroundColor } from '../../uiConfig';
-import { imgHome } from '../../assets';  
+import { dq, imgHome } from '../../assets';  
 import Footer from '../../components/Footer';
+import { DoubleLeftOutlined, QqOutlined } from '@ant-design/icons';
 
 export default function UserAuthentication() {
  
@@ -70,24 +71,24 @@ export default function UserAuthentication() {
         {/* md */}
         <Col xs={{span: 0}} md={{span: 24}}>
             <div align="left" style={{padding: '20px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
-            <h1 style={{fontFamily: 'Italianno'}}>Hello!</h1>
+            {/* <h1 style={{fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h1 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life better!</h1>
+                <h1 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life with joy!</h1>
             </div>
         </Col>
         {/* xs */}
         <Col xs={{span: 24}} md={{span: 0}}>
             <div align="left" style={{padding: '20px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
-            <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1>
+            {/* <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h2 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life better!</h2>
+                <h2 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life with joy!</h2>
             </div>
         </Col>
     </Row>
     <br/> 
         <Row style={{fontFamily: 'Raleway'}}>
         <Col xs={{span: 24}} md={{span: 0}} align="center" style={{marginBottom: '0px', height: 'auto'}}>
-                <img src={imgHome} style={{marginRight: '0px', width :'70%', marginBottom: '0px'}} alt="Loading ..."/>
+                {/* <img src={imgHome} style={{marginRight: '0px', width :'70%', marginBottom: '0px'}} alt="Loading ..."/> */}
             <br/>
             <br/> 
             </Col>
@@ -183,13 +184,23 @@ export default function UserAuthentication() {
                     }} type='link'>Log in</Button> : null
                 }
 
-                
+                 
                 <span id="signinButtonDiv" style={{display: `${authType == 0 ? 'inline-block' : 'none'}`, marginLeft: '20px', transform: 'translate(0px, 13px)'}}></span>
 
                 </div> 
             </Col>
             <Col xs={{span: 0}} md={{span: 16}} align="center">
-                <img src={imgHome} style={{marginRight: '0px', width :'45%'}} alt="Loading ..."/>
+                {/* <img src={imgHome} style={{marginRight: '0px', width :'45%'}} alt="Loading ..."/> */}
+                <div style={{width: '60%', borderRadius: '15px', borderTop: `0px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, padding: '30px'}}>
+                    <div align="right"><img src={imgHome} style={{width: '100px'}} alt="oimgjhome" /></div>
+                    <div style={{fontSize: '23px' }} align="left">
+                         <img src={dq} style={{width: '80px', marginTop: '-40px'}} alt="''"/> &nbsp;
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
+                    
+                    </div>
+                    <h3 align="right"> 
+                    - Romita Sharma</h3>
+                </div>
             </Col>
         </Row>
         <Footer />

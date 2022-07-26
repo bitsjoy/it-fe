@@ -1,5 +1,5 @@
 import { Row, Col, Card } from 'antd'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { diary, noteMaker, time, writer } from '../../assets'
 
@@ -19,27 +19,27 @@ export default function Home() {
     fontWeight: '700'
   }
 
-  const onclick = () => {
-    if(window.innerHeight > window.innerWidth){
-      for( let i = 0; i<=4 ; i++){
-        if(i%2 == 1){
-          document.getElementById(`home-${i}`).style.transform = 'translate(200vw, 0px)';
-        } else {
-          document.getElementById(`home-${i}`).style.transform = 'translate(-200vw, 0px)';
-        }
-      }
-    } else {
-      for( let i = 0; i<=4 ; i++){
-        if(i%2 == 1){
-          document.getElementById(`home-${i}`).style.transform = 'translate(0px, 200vh)';
-        } else {
-          document.getElementById(`home-${i}`).style.transform = 'translate(0px, -200vh)';
-        }
-      }
-    }
+  // const onclick = () => {
+  //   if(window.innerHeight > window.innerWidth){
+  //     for( let i = 0; i<=4 ; i++){
+  //       if(i%2 == 1){
+  //         document.getElementById(`home-${i}`).style.transform = 'translate(200vw, 0px)';
+  //       } else {
+  //         document.getElementById(`home-${i}`).style.transform = 'translate(-200vw, 0px)';
+  //       }
+  //     }
+  //   } else {
+  //     for( let i = 0; i<=4 ; i++){
+  //       if(i%2 == 1){
+  //         document.getElementById(`home-${i}`).style.transform = 'translate(0px, 200vh)';
+  //       } else {
+  //         document.getElementById(`home-${i}`).style.transform = 'translate(0px, -200vh)';
+  //       }
+  //     }
+  //   }
    
     // document.getElementById(x).style.borderRadius = '50%';
-  }
+  //}
 
   return (
     <div id="apps-home" style={{minHeight: '100vh'}}>
@@ -52,10 +52,10 @@ export default function Home() {
         <Col id="home-1"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
         <Card
         onClick={(e)=>{
-          onclick();
+          // onclick();
           setTimeout(()=>{
             navigate('/notes')
-          }, 500)
+          }, 0)
         }}
     hoverable
     style={{...CardStyle, paddingTop: '35px'}}

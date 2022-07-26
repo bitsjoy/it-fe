@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
+
+    <link rel="apple-touch-icon" href="./images/logo.png">
+    
+
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
@@ -440,16 +445,12 @@ _.A("google.accounts.oauth2.hasGrantedAnyScope",function(a){var b=Hn.apply(1,arg
     <script>
       if('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
-              navigator.serviceWorker.register('./serviceworker.js')
+              navigator.serviceWorker.register('%PUBLIC_URL%/serviceworker.js')
                   .then((reg) => console.log('Success: ', reg.scope))
                   .catch((err) => console.log('Failure: ', err));
           })
       }
 
-      history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1);
-    };
       
   </script>
     <!--
