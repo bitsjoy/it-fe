@@ -33,6 +33,7 @@
                 font-size: 2em;
             }
         </style> 
+        <link rel="apple-touch-icon" href="/images/logo.png">
 
     </head>
     <body>
@@ -41,5 +42,14 @@
                 <span>It looks like you are offline.</span>
             </h2>
         </div>
+        <script>
+        if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('%PUBLIC_URL%/serviceworker.js')
+                    .then((reg) => console.log('Success: ', reg.scope))
+                    .catch((err) => console.log('Failure: ', err));
+            })
+        }
+    </script>
     </body>
 </html>
