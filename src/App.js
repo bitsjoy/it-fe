@@ -23,14 +23,14 @@ let deferredPrompt;
 function App() {
   const [installable, setInstallable] = useState(false);
 
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     if(installable == true){
-  //       document.getElementById('installBtn').style.transform = 'translate(-500px, 0px)';
-  //     }
-  //   }, 500);
+  useEffect(()=>{
+    setTimeout(()=>{
+      if(installable == true){
+        document.getElementById('installBtn').style.transform = 'translate(-500px, 0px)';
+      }
+    }, 500);
     
-  // }, [installable])
+  }, [installable])
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (e) => {
@@ -71,7 +71,7 @@ function App() {
  }} />  */}
 {
 installable && 
-          <button id="installBtn" style={{ position: 'fixed', bottom: '0px', right: '0px', zIndex: '999', fontSize: '17px', fontWeight: '500', padding: '10px 30px', border: '1px solid  #009e60', backgroundColor: '#009e60', color: 'white'}} onClick={handleInstallClick}>
+          <button id="installBtn" style={{ position: 'fixed', bottom: '0px', right: '-500px', zIndex: '999', fontSize: '17px', fontWeight: '500', padding: '10px 30px', border: '1px solid  #009e60', backgroundColor: '#009e60', color: 'white'}} onClick={handleInstallClick}>
             Install app &nbsp; <AndroidOutlined /> <AppleOutlined /> <WindowsOutlined /> 
           </button> 
         }
