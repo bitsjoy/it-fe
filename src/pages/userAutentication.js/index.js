@@ -79,7 +79,7 @@ export default function UserAuthentication() {
         </Col>
         {/* xs */}
         <Col xs={{span: 24}} md={{span: 0}}>
-            <div align="left" style={{padding: '20px 20px 20px 20px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
+            <div align="left" style={{padding: '20px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
                 <h2 style={{ color: secondaryColor }}>Software to organise and manage tasks better on a daily basis!</h2>
