@@ -9,7 +9,7 @@ import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from './../../localStorageConfig';
 import { toast, ToastContainer } from 'react-toastify';
 import { noteMaker } from '../../assets';
-import { btnBackgroundColor } from '../../uiConfig';
+import { btnBackgroundColor, secondaryColor } from '../../uiConfig';
 import Fee from './fee';
 
 
@@ -291,11 +291,10 @@ export default function NoteMaker() {
                       document.querySelector('.tox-statusbar__wordcount').click();
                    },
                     selector: 'textarea#full-featured',
-                    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
-                  
+                     plugins: 'preview link media lists checklist linkchecker emoticons',
                     tinydrive_max_image_dimension: 100,
                     mobile: {
-                      plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+                      plugins: 'preview link media lists checklist linkchecker emoticons',
                     },
                     menu: {
                       tc: {
@@ -304,7 +303,7 @@ export default function NoteMaker() {
                       }
                     }, 
                     menubar: false,
-                    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+                    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl',
                     autosave_ask_before_unload: true,  
                     autosave_restore_when_empty: false,
                     autosave_retention: '2m',
@@ -380,7 +379,7 @@ export default function NoteMaker() {
                       document.querySelector('.tox-statusbar__wordcount').click();   
                    },
                     selector: 'textarea#full-featured',
-                    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+                    plugins: 'preview link media lists checklist linkchecker emoticons',
                     tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
                     tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
                     tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
@@ -388,7 +387,7 @@ export default function NoteMaker() {
                     tinydrive_max_image_dimension: 100,
 
                     mobile: {
-                      plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+                      plugins: 'preview link media lists checklist linkchecker emoticons',
                     },
                     menu: {
                       tc: {
@@ -436,22 +435,10 @@ export default function NoteMaker() {
                 !edit && currentNoteId && <><Viewer close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
             }
             {
-                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}><img id="notes-hero" src={noteMaker} style={{width: '40%', border: '0px solid black'}} alt="noteMaker" />
-                <br/>
-                <br/>
-                <br/>  
-                <ButtonPrimary styl={{fontSize: '15px'}} id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
-                  document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
-                  document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
-                  setTimeout(()=>{
-                    setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
-
-                  }, 500);
-    }}></ButtonPrimary> 
-                <br/>
-                <br/>
-                <br/>
-                <br/> 
+                !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}>
+                  <br/><br/>
+                <img id="notes-hero" src={noteMaker} style={{width: '45%', border: '0px solid black'}} alt="noteMaker" />
+                 
                 </div>
             }
              
@@ -468,10 +455,28 @@ export default function NoteMaker() {
 
         
         <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 0}} md={{span: 6}} align="center">
+        {
+                !currentNoteId && currentNoteId != "" && <div align="left" style={{paddingTop: '20px', overflowX: 'hidden'}}>
+                
+                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} className="bounce" id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
+                  // document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                  document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
+                  setTimeout(()=>{
+                    setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
+
+                  }, 500);
+    }}></ButtonPrimary> 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    </div>
+            }
             
-        {!edit && !newNoteWindow && <div align="left"><h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
-        
-        <br/> 
+        {!edit && !newNoteWindow && 
+        <div align="left">
+          {/* <h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3>  */}
+         
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
             {
                 notes ? Object.keys(notes).length !== 0 ? Object.keys(notes).map((Key, i) => {
@@ -484,7 +489,7 @@ export default function NoteMaker() {
         onMouseOut={()=>{
            // document.getElementById('addMoreNotes').style.display = 'none';
         }}
-        ><PlusCircleOutlined /> Add more</span> &nbsp; </span></Button>
+        ><PlusCircleOutlined /> Add more to {Key}</span> &nbsp; </span></Button>
 <br/> 
                         {
                             notes[Key].map(note => {
@@ -492,7 +497,8 @@ export default function NoteMaker() {
                                 <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: btnBackgroundColor,
                                 overflow: 'hidden', textOverflow: 'ellipsis'}} onClick={()=>{
                                     // fetch note and set the variables in state with the returned data
-                                  
+                                    window.scrollTo(0,0);
+                                    
                                     console.log(Key.toString(), note.noteId, note.noteTitle);
                                     setCurrentBook(Key.toString()); setCurrentNoteTitle(note.noteTitle); setCurrentNoteId(note.noteId);
                                 }} type="link">{note.noteTitle}</Button> 
@@ -582,11 +588,37 @@ export default function NoteMaker() {
 
 
 
-
+{/* to hide the save/update buttons in mobile and show buttons that stick at the bottom */}
         <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 24}} md={{span: 0}} align="left">
-        {!edit && !newNoteWindow && <div align="left"><h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
-        
+
+
+        {
+                !currentNoteId && currentNoteId != "" && <div align="left" style={{paddingTop: '20px', overflowX: 'hidden'}}>
+                
+                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} className="bounce" id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
+                  // document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                  document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
+                  setTimeout(()=>{
+                    setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
+
+                  }, 500);
+    }}></ButtonPrimary> 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    </div>
+            }
+
+
+
+
+
+        {!edit && !newNoteWindow && <div align="left">
         <br/> 
+          <h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
+        
+        
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
             {
                 notes ? Object.keys(notes).length !== 0 ? Object.keys(notes).map((Key, i) => {
@@ -599,7 +631,7 @@ export default function NoteMaker() {
         onMouseOut={()=>{
            // document.getElementById('addMoreNotes').style.display = 'none';
         }}
-        ><PlusCircleOutlined /> Add more</span> &nbsp; </span></Button>
+        ><PlusCircleOutlined /> Add more to {Key}</span> &nbsp; </span></Button>
 <br/> 
                         {
                             notes[Key].map(note => {
@@ -607,7 +639,7 @@ export default function NoteMaker() {
                                 <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: btnBackgroundColor,
                                 overflow: 'hidden', textOverflow: 'ellipsis'}} onClick={()=>{
                                     // fetch note and set the variables in state with the returned data
-                                  
+                                    window.scrollTo(0,0);
                                     console.log(Key.toString(), note.noteId, note.noteTitle);
                                     setCurrentBook(Key.toString()); setCurrentNoteTitle(note.noteTitle); setCurrentNoteId(note.noteId);
                                 }} type="link">{note.noteTitle}</Button> 

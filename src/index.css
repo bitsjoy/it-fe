@@ -77,3 +77,30 @@ textarea {
 * {
   transition: transform 1s;
 }
+
+#installBtn {
+  transition: transform 2s !important;
+}
+
+#installBtn :hover { 
+    cursor: pointer; 
+}
+ 
+.bounce {   
+    text-align:center;
+    opacity: 1;
+    background: green;
+    color:#fff; 
+    -webkit-animation: bounce 1s infinite alternate;
+    -moz-animation: bounce 1s infinite alternate;
+    animation: bounce 1s infinite alternate;
+  }
+  @-webkit-keyframes bounce {
+    to { -webkit-transform: scale(1.08); }
+  }
+  @-moz-keyframes bounce {
+    to { -moz-transform: scale(1.08); }
+  }
+  @keyframes bounce {
+    to { transform: scale(1.08); }
+}

@@ -6,7 +6,7 @@ import ButtonPrimary from '../../components/Button'
 import { bearer_token_key } from '../../localStorageConfig'; 
 import jwt_decode from 'jwt-decode';
 import { toast } from 'react-toastify';
-import { btnBackgroundColor } from '../../uiConfig';
+import { btnBackgroundColor, secondaryColor } from '../../uiConfig';
 import { dq, imgHome } from '../../assets';  
 import Footer from '../../components/Footer';
 import { DoubleLeftOutlined, QqOutlined } from '@ant-design/icons';
@@ -40,7 +40,7 @@ export default function UserAuthentication() {
         email: credentialsObject.email
     }).then(res => {
         console.log(res + "kkkk");
-        toast.error('Account already exists, please login with email and password');
+        toast.error('Please login with email and password');
         setAuthType(0);
     }).catch((err) => {
         //  
@@ -50,15 +50,16 @@ export default function UserAuthentication() {
     setAuthType(1);
   }
 
-  useEffect(() => { 
+  useEffect(() => {  
+
         {/* global google */}  
             google.accounts.id.initialize({
-              client_id: "137646467401-h5uamu34eshjngcqhcatmsmedu4brv9r.apps.googleusercontent.com",
+              client_id: process.env.REACT_APP_GOOGLE_AUTH_CLIENT_KEY,
               callback: handleCredentialResponse
             });
             google.accounts.id.renderButton(
               document.getElementById("signinButtonDiv"),
-              { theme: "outline", size: "medium", text: "signup_with" }  // customization attributes
+              { theme: "outline", size: "large", text: "signup_with" }  // customization attributes
             );
             // google.accounts.id.prompt(); // also display the One Tap dialog 
  
@@ -73,19 +74,18 @@ export default function UserAuthentication() {
             <div align="left" style={{padding: '20px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h1 style={{fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h1 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life with joy!</h1>
+                <h1 style={{ color: secondaryColor }}> Software to organise and manage tasks better on a daily basis! </h1>
             </div>
         </Col>
         {/* xs */}
         <Col xs={{span: 24}} md={{span: 0}}>
-            <div align="left" style={{padding: '20px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
+            <div align="left" style={{padding: '20px 20px 20px 20px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h2 style={{ color: btnBackgroundColor }}>Your collection of utility tools to organize life with joy!</h2>
+                <h2 style={{ color: secondaryColor }}>Software to organise and manage tasks better on a daily basis!</h2>
             </div>
         </Col>
-    </Row>
-    <br/> 
+    </Row> 
         <Row style={{fontFamily: 'Raleway'}}>
         <Col xs={{span: 24}} md={{span: 0}} align="center" style={{marginBottom: '0px', height: 'auto'}}>
                 {/* <img src={imgHome} style={{marginRight: '0px', width :'70%', marginBottom: '0px'}} alt="Loading ..."/> */}
@@ -93,9 +93,8 @@ export default function UserAuthentication() {
             <br/> 
             </Col>
             <Col style={{marginBottom: '150px'}} xs={{span: 24}} md={{span: 8}}>
-                <br/>
-                <br/>
-                <br/>
+            <br/>
+                    <br/>
                 <h2 align="left" style={{color: btnBackgroundColor, borderBottom: `1px solid ${btnBackgroundColor}`}}> Log in to get started</h2>
                 <br/>
                 {/* <div id="signinButtonDiv" style={{display: `${authType == 1 ? "block" : "none"}`}}></div> */}
@@ -117,14 +116,17 @@ export default function UserAuthentication() {
                     }}/>
                     
                     <br/>
-
-                    <br/>
+ 
                     </div> : null
                 }    
-                <div align="left">
+                <div align="right">
                     <ButtonPrimary
+                    size="large"
                     // disabledCondition={!(email && confirmPassword ? password === confirmPassword : password)}
                     text={`${ loading ? 'loading' : authType === 0 ? 'Log in' : 'Save and Continue'}`} onClick={()=>{
+                        if(email == null || password == null){
+                            toast.error('Username and Password combination is either wrong or empty');
+                        } else {
                         setLoading(true);
                         if(authType === 0){
                             axios.post( API_BASE + "/api/auth/login",
@@ -174,9 +176,10 @@ export default function UserAuthentication() {
 
                             })
                         }
+                    }
                     }}/> 
                     &nbsp; &nbsp; Or 
-                    { authType === 1 ? <Button onClick={()=>{
+                    { authType === 1 ? <Button size="large" onClick={()=>{
                         setEmail(null);
                         setPassword(null);
                         setConfirmPassword(null);
@@ -185,25 +188,29 @@ export default function UserAuthentication() {
                 }
 
                  
-                <span id="signinButtonDiv" style={{display: `${authType == 0 ? 'inline-block' : 'none'}`, marginLeft: '20px', transform: 'translate(0px, 13px)'}}></span>
+                <span id="signinButtonDiv" style={{display: `${authType == 0 ? 'inline-block' : 'none'}`, marginLeft: '20px', transform: 'translate(0px, 15px)'}}></span>
 
                 </div> 
             </Col>
             <Col xs={{span: 0}} md={{span: 16}} align="center">
                 {/* <img src={imgHome} style={{marginRight: '0px', width :'45%'}} alt="Loading ..."/> */}
                 <div style={{width: '60%', borderRadius: '15px', borderTop: `0px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, padding: '30px'}}>
-                    <div align="right"><img src={imgHome} style={{width: '100px'}} alt="oimgjhome" /></div>
-                    <div style={{fontSize: '23px' }} align="left">
-                         <img src={dq} style={{width: '80px', marginTop: '-40px'}} alt="''"/> &nbsp;
+                    <div align="center"><img src={imgHome} style={{width: '70%'}} alt="oimgjhome" /></div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style={{fontSize: '19px', color: '#c71585' }} align="left">
+                         <img src={dq} style={{width: '50px', marginTop: '-40px'}} alt="''"/> &nbsp;
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
                     
                     </div>
-                    <h3 align="right"> 
+                    <br/>
+                    <h3 align="right" style={{color: 'grey'}}> 
                     - Romita Sharma</h3>
                 </div>
             </Col>
-        </Row>
-        <Footer />
+        </Row> 
     </>
   )
 }

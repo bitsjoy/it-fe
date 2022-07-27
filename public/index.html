@@ -453,6 +453,12 @@ _.A("google.accounts.oauth2.hasGrantedAnyScope",function(a){var b=Hn.apply(1,arg
 
       
   </script>
+  <script>
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+  </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

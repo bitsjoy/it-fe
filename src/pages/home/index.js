@@ -1,7 +1,9 @@
+import { CiCircleFilled, MediumCircleFilled } from '@ant-design/icons';
 import { Row, Col, Card } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { diary, noteMaker, time, writer } from '../../assets'
+import { btnTextColor, secondaryColor, successColor } from '../../uiConfig';
 
 export default function Home() {
 
@@ -43,9 +45,9 @@ export default function Home() {
 
   return (
     <div id="apps-home" style={{minHeight: '100vh'}}>
-      <br/>
-      {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
-      <div align="center" id="home-0" style={{fontFamily: 'Italianno', fontSize: '45px'}}>Tool kit</div>
+      <br/> 
+        {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
+   
 <br/>
       <Row>
         <br/>
@@ -59,9 +61,9 @@ export default function Home() {
         }}
     hoverable
     style={{...CardStyle, paddingTop: '35px'}}
-    cover={<img alt="note-maker" style={{width: '60%', margin: 'auto'}} src={noteMaker} />}
+    cover={<img alt="note-maker" style={{width: '45%', margin: 'auto'}} src={noteMaker} />}
   >
-    <Card.Meta title="NOTES" description="Lets save some of your time and a lot of trees" />
+    <Card.Meta title={<span>NOTES<br/> <sup style={{color: successColor}}> Live</sup></span>} ZZZdescription="Let us save some of your time and a lot of trees" />
   </Card>
 </Col>
 
@@ -77,7 +79,7 @@ export default function Home() {
 
   cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
 >
-  <Card.Meta title="DAILY DIARY" description="Story of your life, every single day is a new chapters" />
+  <Card.Meta title={<span>DAILY DIARY<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Story of your life, every single day is a new chapters" />
 </Card>
       </Col>
 
@@ -90,9 +92,9 @@ export default function Home() {
   hoverable
   style={{...CardStyle, paddingTop: '40px'}}
 
-  cover={<img alt="writer" style={{width: '60%', margin: 'auto'}}  src={writer} />}
+  cover={<img alt="writer" style={{width: '66%', margin: 'auto'}}  src={writer} />}
 >
-  <Card.Meta title="NEW HABIT" description="All-in-one tool for writing a book, organise your thoughts efficiently" />
+  <Card.Meta title={<span>NEW HABIT<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Helps develop a new good habit or lose a bad old one!" />
 </Card>
       </Col>
 
@@ -107,7 +109,7 @@ export default function Home() {
 
     cover={<img alt="timer" style={{width: '45%', margin: 'auto'}}  src={time} />}
   >
-    <Card.Meta title="TIME MANAGER" description="Small changes are often underestimated" />
+    <Card.Meta title={<span>TIME MANAGER<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Small changes are often underestimated" />
   </Card>
 
         </Col>

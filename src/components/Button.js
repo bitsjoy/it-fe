@@ -4,8 +4,8 @@ import React from 'react'
 import { btnBackgroundColor, btnTextColor } from '../uiConfig'; 
 
 export default function ButtonPrimary(props) {
-  const { text, onClick, disabledCondition, styl, id } = props;
+  const { text, onClick, disabledCondition, styl, id, size, className } = props;
   return (
-    <Button disabled={disabledCondition} id={id} style={{backgroundColor: btnBackgroundColor, color: btnTextColor, border: '0px', ...styl}} onClick={onClick}>{text === 'loading' ? <SyncOutlined spin/> : text}</Button>
+    <Button size={size} disabled={disabledCondition} id={id} className={className} style={{backgroundColor: btnBackgroundColor, color: btnTextColor, border: '0px', ...styl}} onClick={onClick}>{text === 'loading' ? <SyncOutlined spin/> : text}</Button>
   )
 }
