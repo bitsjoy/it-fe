@@ -1,7 +1,8 @@
 import { BookOutlined, CiCircleFilled, DotChartOutlined, LoadingOutlined, PlayCircleFilled, SyncOutlined } from '@ant-design/icons'
 import { Col, List, Row } from 'antd'
 import React, { useEffect } from 'react'
-import { btnBackgroundColor } from '../../uiConfig'
+import { mc, rupay, upi, visa } from '../../assets'
+import { btnBackgroundColor, secondaryColor } from '../../uiConfig'
 
 export default function Fee() {
     useEffect(()=>{
@@ -9,55 +10,71 @@ export default function Fee() {
     }, [])
   return (
     <div>
+        <br/> 
         <Row>
             <Col span={24} align="center">
                 <Row>
-                    <Col xs={{span: 24}} md={{span: 16}} align="center">
-                        <iframe style={{ borderRadius: '10px', width: '90%', height: '50vh'}} src="https://www.youtube.com/embed/4yFfr1myDg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <br/>
-                <span>Price after Early Bird discount :<span style={{fontSize: '36px', color: 'goldenrod'}}> <br/>  <sup>&#x20B9;</sup>99 <s style={{color: 'silver', fontSize: '21px', color: 'silver'}}>&nbsp;<sup>&#x20B9;</sup> 499 &nbsp;</s> </span></span>
-                <br/>
-                <br/>
-                <form id="rz_form"> </form>
-                        <br/> 
-                    </Col>
-                    <Col xs={{span: 0}} md={{span: 8}} align="left">
-                        {/* <iframe style={{width: '50vw', height: '50vh'}} src="https://www.youtube.com/embed/4yFfr1myDg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-                        <h1 style={{ paddingLeft:'0px', color: 'goldenrod', border: `0px solid ${'goldenrod'}`, display: 'inline'}}>Notes <BookOutlined  /> </h1>
-                        <br/>
-                        <br/>
-                        <List>
+                    <Col xs={{span: 24}} md={{span: 8}} align="left">
+                    <h1 style={{ paddingLeft:'0px', color: 'goldenrod', border: `0px solid ${'goldenrod'}`, display: 'inline'}}>Notes <BookOutlined  /> </h1>
+<br/>
+<br/>
+                    <List>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Create a new collection of Notes</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Add note to a collection</List.Item>
-                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Insert image in a Note</List.Item>
+                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Insert image/Videos/Links in a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Update a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Delete a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Sharing Notes with friends</List.Item>
-                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Download a Note as pdf</List.Item>
+                            {/* <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Download a Note as pdf</List.Item> */}
                         </List>
+                        <br/>
+                        <div style={{ borderRadius: '10px', border: `2px solid goldenrod`, padding: '30px'}} align="center">
+                        Pay once, use forever!
+               <span style={{fontSize: '40px', color: btnBackgroundColor}}> <br/>  <sup>&#x20B9;</sup><b>99</b>/- <s style={{color: 'silver', fontSize: '21px', color: 'silver'}}>&nbsp;<sup>&#x20B9;</sup> 499 &nbsp;</s> </span>
+                <br/>
+                <form id="rz_form"> </form> 
+                <span style={{backgroundColor :'white', padding: '10px'}}>
+                <img src={upi} alt="upi" style={{width: '30px'}} /> 
+                <img src={visa} alt="visa" style={{width: '50px'}} /> 
+                <img src={mc} alt="mc" style={{width: '30px'}} /> &nbsp;&nbsp;
+                <img src={rupay} alt="rupay" style={{width: '40px'}} /> 
+                    </span> 
+              
+                </div>
+                <br/>
+               <br/>
+               <br/>
+                    </Col>
                     
+                    <Col xs={{span: 24}} md={{span: 16}} align="center">
+                        <h3 align="left" style={{width: '80%'}}>User's guide</h3>
+                        {/* <iframe style={{width: '50vw', height: '50vh'}} src="https://www.youtube.com/embed/4yFfr1myDg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+                        <iframe style={{ borderRadius: '10px', width: '80%', height: '50vh'}} src="https://www.youtube.com/embed/0TuoHR3s23k?autoplay=1" title="notes user's guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       
+                   <br/>
+                   <br/>
+                          <div align="left" style={{width: '80%'}}>
+                *This is NOT a recurring payment, it is a one time payment and you can use NOTES app after paying this minimal fee.
+                            </div>       
                     </Col>
                 </Row> 
                 <br/>
                 <Row>
                     
 
-                    <Col xs={{span: 24}} md={{span: 0}}>
-                         
+                    {/* <Col xs={{span: 24}} md={{span: 0}}>
+                         <br/>
                         <h1 align="center" style={{paddingLeft:'0px', color: 'goldenrod', borderBottom: `0px solid ${'goldenrod'}`, display: 'inline', padding: '0px 10px'}}> <BookOutlined  /> Features </h1>
                          
                         <br/>
                     <List align="left">
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Create a new collection of Notes</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Add note to a collection</List.Item>
-                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Insert image in a Note</List.Item>
+                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Insert image/Videos/Links in a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Update a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Delete a Note</List.Item>
                             <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Sharing Notes with friends</List.Item>
-                            <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Download a Note as pdf</List.Item>
                         </List>
-                       {/* <iframe style={{width: '80vw', height: 'auto'}} src="https://www.youtube.com/embed/4yFfr1myDg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-                    </Col>
+                    </Col> */}
                 </Row>
                 
             </Col>

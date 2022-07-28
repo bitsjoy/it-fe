@@ -19,6 +19,8 @@ import { AndroidOutlined, AppleOutlined, SyncOutlined, WindowsOutlined } from '@
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { Button, Input, Modal } from 'antd'; 
 import { btnBackgroundColor } from './uiConfig';
+import Aboutus from './pages/Aboutus';
+import Contactus from './pages/Contactus';
 
 let deferredPrompt;  
     
@@ -76,8 +78,10 @@ function App() {
       <br/>
         <Routes> 
           <Route path='/' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
-          <Route path='privacy_policy' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <PrivacyPolicy />}></Route>
-          <Route path='/terms_and_conditions' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
+          <Route path='about_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Aboutus />}></Route>
+          <Route path='contact_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Contactus />}></Route>
+          <Route path='privacy_policy' exact element={<PrivacyPolicy />}></Route>
+          <Route path='/terms_and_conditions' exact element={<MainForm/>}></Route>
           <Route path='/about_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
           <Route path='/contact_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
           <Route path='/profile' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Profile />}></Route>

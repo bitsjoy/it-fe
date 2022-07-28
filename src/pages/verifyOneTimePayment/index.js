@@ -25,7 +25,7 @@ export default function VerifyOneTime() {
         console.log(res);
             if(res.data.ownedProducts.includes("Notes")){ 
                 document.getElementById("verifying").style.color = '#29AB87';
-                document.getElementById("verifying").innerHTML = "Congratulations!<br/><br/> <img style='width: 40%' src='https://c.tenor.com/4blWuIh5MIYAAAAC/baby-yoda.gif' />";
+                document.getElementById("verifying").innerHTML = "Congratulations!<br/><br/> <img style='width: 35%' src='https://c.tenor.com/4blWuIh5MIYAAAAC/baby-yoda.gif' />";
                document.getElementById('make_notes').style.display = 'block';
                localStorage.removeItem('payment_for_product');
       

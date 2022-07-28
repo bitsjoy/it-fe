@@ -49,6 +49,8 @@ export default function Home() {
         {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
    
 <br/>
+<br/>
+<br/>
       <Row>
         <br/>
         <Col id="home-1"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
@@ -61,9 +63,11 @@ export default function Home() {
         }}
     hoverable
     style={{...CardStyle, paddingTop: '35px'}}
-    cover={<img alt="note-maker" style={{width: '45%', margin: 'auto'}} src={noteMaker} />}
+    cover={<img alt="note-maker" style={{width: '42%', margin: 'auto'}} src={noteMaker} />}
   >
-    <Card.Meta title={<span>NOTES<br/> <sup style={{color: successColor}}> Live</sup></span>} ZZZdescription="Let us save some of your time and a lot of trees" />
+  <h3 align="center">Notes
+  <br/>
+  <sub style={{color: successColor}}>LIVE</sub></h3>
   </Card>
 </Col>
 
@@ -75,11 +79,14 @@ export default function Home() {
 
 <Card
   hoverable
-  style={{...CardStyle, paddingTop: '50px'}}
+  style={{...CardStyle, paddingTop: '50px', opacity: '0.3'}}
 
   cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
 >
-  <Card.Meta title={<span>DAILY DIARY<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Story of your life, every single day is a new chapters" />
+<h3 align="center">Daily Diary
+<br/>
+  <sub style={{color: secondaryColor}}>Coming soon</sub></h3>
+
 </Card>
       </Col>
 
@@ -90,12 +97,14 @@ export default function Home() {
 
 <Card
   hoverable
-  style={{...CardStyle, paddingTop: '40px'}}
+  style={{...CardStyle, paddingTop: '40px',  opacity: '0.3'}}
 
   cover={<img alt="writer" style={{width: '66%', margin: 'auto'}}  src={writer} />}
 >
-  <Card.Meta title={<span>NEW HABIT<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Helps develop a new good habit or lose a bad old one!" />
-</Card>
+<h3 align="center">New Habit
+<br/>
+  <sub style={{color: secondaryColor}}>Coming soon</sub></h3>
+ </Card>
       </Col>
 
 
@@ -105,11 +114,15 @@ export default function Home() {
         <Col id="home-4" xs={{span: '24'}} md={{span: '6'}}>  
   <Card
     hoverable
-    style={{...CardStyle, paddingTop: '28px'}}
+    style={{...CardStyle, paddingTop: '28px',  opacity: '0.3'}}
 
     cover={<img alt="timer" style={{width: '45%', margin: 'auto'}}  src={time} />}
   >
-    <Card.Meta title={<span>TIME MANAGER<br/> <sup style={{color: secondaryColor}}>coming soon</sup></span>} ZZZdescription="Small changes are often underestimated" />
+   
+  <h3 align="center">Time Manager
+  <br/>
+  <sub style={{color: secondaryColor}}>Coming soon</sub>
+  </h3>
   </Card>
 
         </Col>

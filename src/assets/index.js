@@ -4,6 +4,10 @@ import writer from './writer.svg';
 import diary from './diary.svg';
 import time from './time.svg';
 import dq from './doublequotes.png';
+import upi from './upi.webp';
+import visa from './visa.png';
+import mc from './mc.png';
+import rupay from './rupay.png';
 
 export {
     imgHome,
@@ -11,5 +15,9 @@ export {
     writer,
     diary,
     time,
-    dq
+    dq,
+    upi,
+    visa,
+    mc,
+    rupay
 }

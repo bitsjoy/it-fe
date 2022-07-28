@@ -202,12 +202,11 @@ export default function UserAuthentication() {
                     <br/>
                     <div style={{fontSize: '19px', color: '#c71585' }} align="left">
                          <img src={dq} style={{width: '50px', marginTop: '-40px'}} alt="''"/> &nbsp;
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
+                         For every minute spent organizing, an hour is earned.
                     
-                    </div>
-                    <br/>
-                    <h3 align="right" style={{color: 'grey'}}> 
-                    - Romita Sharma</h3>
+                    </div> 
+                    <h3 align="right" style={{color: 'grey', width: '80%'}}> 
+                    - Benjamin Franklin</h3>
                 </div>
             </Col>
         </Row> 

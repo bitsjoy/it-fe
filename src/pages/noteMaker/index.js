@@ -294,7 +294,7 @@ export default function NoteMaker() {
                      plugins: 'preview link media lists checklist linkchecker emoticons',
                     tinydrive_max_image_dimension: 100,
                     mobile: {
-                      plugins: 'preview link media lists checklist linkchecker emoticons',
+                      plugins: 'preview link media lists checklist linkchecker emoticons images',
                     },
                     menu: {
                       tc: {
@@ -482,7 +482,7 @@ export default function NoteMaker() {
                 notes ? Object.keys(notes).length !== 0 ? Object.keys(notes).map((Key, i) => {
                     return notes[Key].find(x => x.deleted !== true) ? <Collapse.Panel style={{border: `0px solid silver`, borderBottom: '0px'}} header={Key} key={i}>
                         <div align="left">
-        <Button type="link" style={{border: `0px solid ${btnBackgroundColor}`, color: 'black'}} onClick={()=>{setNewNoteWindow(true); setCurrentNoteId(""); setCurrentBook(Key); setCurrentNoteTitle('type here'); setCurrentBookEditable(false);}}><span> 
+        <Button type="link" style={{border: `0px solid ${btnBackgroundColor}`, color: 'black'}} onClick={()=>{setNewNoteWindow(true); setCurrentNoteId(""); setCurrentBook(Key); setCurrentNoteTitle('type here'); setCurrentBookEditable(false); setCurrentNoteBody('<p>Sample text for new note, click to edit </p>')}}><span> 
             <span onMouseOver={()=>{
            // document.getElementById('addMoreNotes').style.display = 'inline';
         }}
