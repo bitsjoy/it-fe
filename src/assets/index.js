@@ -8,6 +8,7 @@ import upi from './upi.webp';
 import visa from './visa.png';
 import mc from './mc.png';
 import rupay from './rupay.png';
+import logo from './logo.png';
 
 export {
     imgHome,
@@ -19,5 +20,6 @@ export {
     upi,
     visa,
     mc,
-    rupay
+    rupay,
+    logo
 }
