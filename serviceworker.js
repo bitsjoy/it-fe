@@ -1,6 +1,6 @@
-const version = 0.1;
+const version = 2;
 
-const CACHE_NAME = "version-1";
+const CACHE_NAME = "version-2";
 const urlsToCache = [ 'index.html', 'offline.html' ];
 
 const self = this;
