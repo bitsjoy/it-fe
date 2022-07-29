@@ -21,6 +21,7 @@ import { Button, Input, Modal } from 'antd';
 import { btnBackgroundColor } from './uiConfig';
 import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
+import Fee from './pages/noteMaker/fee';
 
 let deferredPrompt;  
     
@@ -85,9 +86,11 @@ function App() {
           <Route path='/about_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
           <Route path='/contact_us' exact element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <MainForm/>}></Route>
           <Route path='/profile' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Profile />}></Route>
+
           <Route path='/notes' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <NoteMaker />}></Route>
+          <Route path='/notes/buy' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Fee />}></Route>
+
           <Route path='/editorview' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <NoteMaker />}></Route>
-          {/* <Route path='/onboarding' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <OnBoarding/>}></Route> */}
           <Route path='/verifyonetimepayment/:x' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <VerifyOneTime />}></Route>
 
         </Routes> 

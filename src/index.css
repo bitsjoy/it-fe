@@ -91,16 +91,16 @@ textarea {
     opacity: 1;
     background: green;
     color:#fff; 
-    -webkit-animation: bounce 1s infinite alternate;
-    -moz-animation: bounce 1s infinite alternate;
-    animation: bounce 1s infinite alternate;
+    -webkit-animation: bounce 0.3s infinite alternate;
+    -moz-animation: bounce 0.3s infinite alternate;
+    animation: bounce 0.3s infinite alternate;
   }
   @-webkit-keyframes bounce {
-    to { -webkit-transform: scale(1.08); }
+    to { -webkit-transform: scale(1.04); }
   }
   @-moz-keyframes bounce {
-    to { -moz-transform: scale(1.08); }
+    to { -moz-transform: scale(1.04); }
   }
   @keyframes bounce {
-    to { transform: scale(1.08); }
+    to { transform: scale(1.04); }
 }

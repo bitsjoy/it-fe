@@ -5,9 +5,27 @@ import { mc, rupay, upi, visa } from '../../assets'
 import { btnBackgroundColor, secondaryColor } from '../../uiConfig'
 
 export default function Fee() {
-    useEffect(()=>{
+
+
+    useEffect(() => { 
         localStorage.setItem('payment_for_product', 'Notes')
-    }, [])
+
+        const script = document.createElement('script');
+        
+        script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+        script.async = true;
+        script.setAttribute('data-payment_button_id' , "pl_JxBuBqoSa0PGbf");
+     
+    
+        if(document.getElementById('rz_form')) {
+            document.getElementById('rz_form').innerHTML = '';
+            document.getElementById('rz_form').appendChild(script); 
+        }
+    
+    
+      
+      }, []);
+
   return (
     <div>
         <br/> 
@@ -15,7 +33,7 @@ export default function Fee() {
             <Col span={24} align="center">
                 <Row>
                     <Col xs={{span: 24}} md={{span: 8}} align="left">
-                    <h1 style={{ paddingLeft:'0px', color: 'goldenrod', border: `0px solid ${'goldenrod'}`, display: 'inline'}}>Notes <BookOutlined  /> </h1>
+                    <h1 style={{ paddingLeft:'0px', color: secondaryColor, border: `0px solid ${'goldenrod'}`, display: 'inline'}}>Notes <BookOutlined  /> </h1>
 <br/>
 <br/>
                     <List>
@@ -28,7 +46,7 @@ export default function Fee() {
                             {/* <List.Item style={{color: btnBackgroundColor}}><PlayCircleFilled/> &nbsp; Download a Note as pdf</List.Item> */}
                         </List>
                         <br/>
-                        <div style={{ borderRadius: '10px', border: `2px solid goldenrod`, padding: '30px'}} align="center">
+                        <div style={{ borderRadius: '0px', border: `0px solid ${secondaryColor}`, padding: '30px'}} align="center">
                         Pay once, use forever!
                <span style={{fontSize: '40px', color: btnBackgroundColor}}> <br/>  <sup>&#x20B9;</sup><b>99</b>/- <s style={{color: 'silver', fontSize: '21px', color: 'silver'}}>&nbsp;<sup>&#x20B9;</sup> 499 &nbsp;</s> </span>
                 <br/>
@@ -49,7 +67,7 @@ export default function Fee() {
                     <Col xs={{span: 24}} md={{span: 16}} align="center">
                         <h3 align="left" style={{width: '80%'}}>User's guide</h3>
                         {/* <iframe style={{width: '50vw', height: '50vh'}} src="https://www.youtube.com/embed/4yFfr1myDg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-                        <iframe style={{ borderRadius: '10px', width: '80%', height: '50vh'}} src="https://www.youtube.com/embed/0TuoHR3s23k?autoplay=1" title="notes user's guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       
+                        <iframe style={{ borderRadius: '0px', width: '80%', height: '50vh'}} src="https://www.youtube.com/embed/0TuoHR3s23k?autoplay=1" title="notes user's guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       
                    <br/>
                    <br/>
                           <div align="left" style={{width: '80%'}}>

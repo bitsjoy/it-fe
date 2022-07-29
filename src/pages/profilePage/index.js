@@ -2,8 +2,10 @@ import React from 'react'
  
 import { Row, Col, Button } from 'antd';
 import { btnBackgroundColor } from '../../uiConfig';
+import { useNavigate } from 'react-router';
 
 export default function Profile() {
+  let navigate = useNavigate();
   return (
     <div style={{height: '100vh'}}>
 
@@ -18,6 +20,7 @@ export default function Profile() {
         <br/>
         <Button style={{padding: '0px', color: btnBackgroundColor, borderBottom : `1px solid ${btnBackgroundColor}`}} onClick={()=>{
                     localStorage.clear();
+                    navigate('/');
                     window.location.reload();
                 }} type="link"><b>Log out</b></Button>
      </div>

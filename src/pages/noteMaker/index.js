@@ -9,11 +9,13 @@ import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from './../../localStorageConfig';
 import { toast, ToastContainer } from 'react-toastify';
 import { noteMaker } from '../../assets';
-import { btnBackgroundColor, secondaryColor } from '../../uiConfig';
-import Fee from './fee';
+import { btnBackgroundColor, secondaryColor } from '../../uiConfig'; 
+import { useNavigate } from 'react-router';
 
 
 export default function NoteMaker() { 
+
+  let navigate = useNavigate();
  
   let noteHTMLCharacterLimit = 1000000;
 
@@ -44,21 +46,7 @@ export default function NoteMaker() {
 
   
 
-  useEffect(() => { 
-    const script = document.createElement('script');
-    
-    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-    script.async = true;
-    script.setAttribute('data-payment_button_id' , "pl_JxBuBqoSa0PGbf");
- 
 
-    if(document.getElementById('rz_form')) document.getElementById('rz_form').appendChild(script); 
-
-
-    return () => { 
-
-    }
-  }, [userHasAccess]);
 
   
      
@@ -80,11 +68,18 @@ export default function NoteMaker() {
 
       } else {
         setUserHasAccess(false);
+        navigate('/notes/buy');
+
       }
 }).catch((err) => {
   toast.error(err.response.data.message);
 })
-  }, [])
+
+return () => {  
+ 
+}
+   
+}, [])
 
   
 
@@ -108,7 +103,7 @@ export default function NoteMaker() {
         }, {}));
         console.log(res.data);
     }).catch((err) => {
-        toast.error(err.message);
+        toast.error(err.response.data.message);
     })
 }
   }, [])
@@ -153,7 +148,7 @@ export default function NoteMaker() {
     } else {
 
     if(currentBook == null || currentNoteTitle == null){
-      toast.error("collection-name and note-title are empty");
+      toast.error("collection-name or note-title are empty");
     } else {
     console.log(editorRef.current.getContent());
     setSavingNoteProcess(true);
@@ -181,7 +176,7 @@ export default function NoteMaker() {
         }
       }).then((res)=>{
         console.log(res);
-        toast.success('Collection updated')
+        toast.success('Note added to collection, you can return to library')
        // window.location.reload(); // also resets the state variables
     setSavingNoteProcess(false);
       }).catch(err => {   
@@ -227,7 +222,7 @@ export default function NoteMaker() {
         }
       }).then((res)=>{
         console.log(res);
-        toast.success("Note updated");
+        toast.success("Note updated, you can return to library");
     setUpdatingNoteProcess(false);
       }).catch(err => {  
         toast.error(err.data.response.message);
@@ -432,12 +427,17 @@ export default function NoteMaker() {
             }
 
             {
-                !edit && currentNoteId && <><Viewer close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
+                !edit && currentNoteId && <><Viewer onClick={()=>{
+                                        // setCurrentBook(Key.toString()); setCurrentNoteTitle(note.noteTitle); setCurrentNoteId(note.noteId); setCurrentNoteBody("lolpoo");
+                                        setTimeout(()=>{setEdit(true);
+                                        setCurrentBookEditable(false);}, 300)
+                                    }} close={closeViewer} loading={loadingNoteBody} rawHtmlBody={currentNoteBody} noteId={currentNoteId} title={currentNoteTitle} bookTitle={currentBook}/></>
             }
             {
                 !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}>
                   <br/><br/>
                 <img id="notes-hero" src={noteMaker} style={{width: '45%', border: '0px solid black'}} alt="noteMaker" />
+                
                  
                 </div>
             }
@@ -452,9 +452,9 @@ export default function NoteMaker() {
 
 
 
-
+        <Col style={{overflowY: 'hidden', height: '75vh'}} xs={{span: 0}} md={{span: 1}} align="center"></Col>
         
-        <Col style={{overflowY: 'auto', height: '75vh'}} xs={{span: 0}} md={{span: 6}} align="center">
+        <Col style={{overflowY: 'auto', overflowX: 'hidden', height: '75vh'}} xs={{span: 0}} md={{span: 5}} align="center">
         {
                 !currentNoteId && currentNoteId != "" && <div align="left" style={{paddingTop: '20px', overflowX: 'hidden'}}>
                 
@@ -475,7 +475,7 @@ export default function NoteMaker() {
             
         {!edit && !newNoteWindow && 
         <div align="left">
-          {/* <h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3>  */}
+         <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "LIBRARY" : "Collections will be shown here"}</h3>  
          
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
             {
@@ -494,8 +494,8 @@ export default function NoteMaker() {
                         {
                             notes[Key].map(note => {
                                 return    <> 
-                                <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: btnBackgroundColor,
-                                overflow: 'hidden', textOverflow: 'ellipsis'}} onClick={()=>{
+                                <Button align="left" title={note.noteTitle} style={{maxWidth: '70%',
+                                overflow: 'hidden', textOverflow: 'ellipsis', color: `${currentNoteId == note.noteId ? secondaryColor : btnBackgroundColor }`}} onClick={()=>{
                                     // fetch note and set the variables in state with the returned data
                                     window.scrollTo(0,0);
                                     
@@ -556,7 +556,7 @@ export default function NoteMaker() {
     </Collapse></div>}
 
     {
-        edit && <><br/><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
+        edit && <><br/><ButtonPrimary className="bounce" disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '100%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
         <br/>
 <br/>
 <Button type="link" onClick={()=>{ 
@@ -566,7 +566,7 @@ export default function NoteMaker() {
     }
 
 {
-        newNoteWindow && <><br/><ButtonPrimary disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '70%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
+        newNoteWindow && <><br/><ButtonPrimary className="bounce" disabledCondition={currentBook == null || currentNoteTitle == null} styl={{width: '100%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
 <br/>
 <br/>
 <Button type="link" onClick={()=>{ 
@@ -616,7 +616,7 @@ export default function NoteMaker() {
 
         {!edit && !newNoteWindow && <div align="left">
         <br/> 
-          <h3 style={{color: btnBackgroundColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Collections" : "Collections will be shown here"}</h3> 
+          <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Library" : "Collections will be shown here"}</h3> 
         
         
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
@@ -636,7 +636,7 @@ export default function NoteMaker() {
                         {
                             notes[Key].map(note => {
                                 return    <> 
-                                <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: btnBackgroundColor,
+                                <Button align="left" title={note.noteTitle} style={{maxWidth: '70%', color: `${currentNoteId === note.noteId ? secondaryColor : btnBackgroundColor}`,
                                 overflow: 'hidden', textOverflow: 'ellipsis'}} onClick={()=>{
                                     // fetch note and set the variables in state with the returned data
                                     window.scrollTo(0,0);
@@ -707,7 +707,7 @@ export default function NoteMaker() {
         <Col xs={{span: 24}} md={{span: 0}} align="center">
             <div style={{position: 'fixed', bottom: '10px', right: '20px'}}>
             {
-        edit && <><ButtonPrimary styl={{width: '100%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
+        edit && <><ButtonPrimary className="bounce" styl={{width: '100%'}} onClick={updateNote} text={updatingNoteProcess ? 'loading' : 'Update'}></ButtonPrimary>
         
 </>
     }
@@ -715,7 +715,7 @@ export default function NoteMaker() {
 {
         newNoteWindow && <>
         
-        <ButtonPrimary style={{display: 'inline'}}  styl={{width: '100%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
+        <ButtonPrimary className="bounce" style={{display: 'inline'}}  styl={{width: '100%'}} onClick={saveNote} text={savingNoteProcess ? 'loading' : 'Save'}></ButtonPrimary>
 
 
 
@@ -751,10 +751,7 @@ export default function NoteMaker() {
 </Col>
 </Row>
       </Row>
-      : userHasAccess === false ? 
-      <div>
-        <Fee />
-      </div> : <span style={{width: '100%', position: 'relative', top: '37vh'}}><SyncOutlined spin style={{fontSize: '25px'}} /></span>
+      : <span style={{width: '100%', position: 'relative', top: '37vh'}}><SyncOutlined spin style={{fontSize: '25px'}} /></span>
   }
 
 <Modal title="Share with" visible={share} onOk={()=>{}} onCancel={()=>{setShare(false)}}

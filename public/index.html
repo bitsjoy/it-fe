@@ -454,10 +454,13 @@ _.A("google.accounts.oauth2.hasGrantedAnyScope",function(a){var b=Hn.apply(1,arg
       
   </script>
   <script>
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1);
-    };
+    
+     history.pushState(null, null, location.href);
+    // window.onpopstate = function () {
+    //   if(location.href.split('/')[location.href.split('/').length -1] == "notes"){
+    //     history.go(1);
+    //   } 
+    // };
   </script>
     <!--
       This HTML file is a template.
