@@ -40,46 +40,40 @@ export default function NoteMaker() {
   const [ deleteNoteProcess, setDeleteNoteProcess ] = useState(false);
   const [ editorLoaded, setEditorLoaded ] = useState(false);
 
-  const [ userHasAccess, setUserHasAccess ] = useState(null);
+  const [ userHasAccess, setUserHasAccess ] = useState(true);
 
   const editorRef = useRef(null);
 
-  
-
-
-
-  
-     
-
-  useEffect(() => {
-    axios.post(API_BASE + '/api/user/getUserOwnedProducts', {
-      email: localStorage.getItem('bitsjoy_email'),
-      // paymentId: "pay_JxGlP9laUhy2wW",
-      // product: "Notes"
-  },{ 
-    headers : {
-    'Authorization' : localStorage.getItem(bearer_token_key),
-    'Content-Type': 'application/json'
-}}).then(res => {
-  console.log(res);
-      if(res.data.ownedProducts.includes("Notes")){
-        setUserHasAccess(true);
- // window.location.reload();
-
-      } else {
-        setUserHasAccess(false);
-        navigate('/notes/buy');
-
-      }
-}).catch((err) => {
-  toast.error(err.response.data.message);
-})
-
-return () => {  
- 
-}
    
-}, [])
+//   useEffect(() => {
+//     axios.post(API_BASE + '/api/user/getUserOwnedProducts', {
+//       email: localStorage.getItem('bitsjoy_email'),
+//       // paymentId: "pay_JxGlP9laUhy2wW",
+//       // product: "Notes"
+//   },{ 
+//     headers : {
+//     'Authorization' : localStorage.getItem(bearer_token_key),
+//     'Content-Type': 'application/json'
+// }}).then(res => {
+//   console.log(res);
+//       if(res.data.ownedProducts.includes("Notes")){
+//         setUserHasAccess(true);
+//  // window.location.reload();
+
+//       } else {
+//         setUserHasAccess(false);
+//         navigate('/notes/buy');
+
+//       }
+// }).catch((err) => {
+//   toast.error(err.response.data.message);
+// })
+
+// return () => {  
+ 
+// }
+   
+// }, [])
 
   
 
@@ -436,8 +430,9 @@ return () => {
             {
                 !currentNoteId && currentNoteId != "" && <div align="center" style={{paddingTop: '20px'}}>
                   <br/><br/>
-                <img id="notes-hero" src={noteMaker} style={{width: '45%', border: '0px solid black'}} alt="noteMaker" />
-                
+                <img id="notes-hero" src={noteMaker} style={{width: '35%', border: '0px solid black'}} alt="noteMaker" />
+                <br/>
+                 
                  
                 </div>
             }
@@ -475,7 +470,7 @@ return () => {
             
         {!edit && !newNoteWindow && 
         <div align="left">
-         <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "LIBRARY" : "Collections will be shown here"}</h3>  
+         <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Library" : "Collections will be shown here"}</h3>  
          
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
             {

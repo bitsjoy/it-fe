@@ -9,6 +9,7 @@ import visa from './visa.png';
 import mc from './mc.png';
 import rupay from './rupay.png';
 import logo from './logo.png';
+import enter from './enter.svg';
 
 export {
     imgHome,
@@ -21,5 +22,6 @@ export {
     visa,
     mc,
     rupay,
-    logo
+    logo,
+    enter
 }

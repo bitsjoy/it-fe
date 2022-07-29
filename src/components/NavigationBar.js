@@ -1,11 +1,50 @@
  
-import { AppstoreOutlined, BellFilled, BellOutlined, ContactsFilled, DownOutlined, InfoCircleFilled, InfoOutlined, MoreOutlined, PhoneOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, BellFilled, BellOutlined, ContactsFilled, DownloadOutlined, DownOutlined, InfoCircleFilled, InfoOutlined, MoreOutlined, PhoneOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Col, Dropdown, Menu, Row, Space } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom' 
 import { btnBackgroundColor } from '../uiConfig'
 
+
+let deferredPrompt;  
+
+
 export default function NavigationBar() {
+
+  const [installable, setInstallable] = useState(false); 
+    
+ 
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI notify the user they can install the PWA
+      setInstallable(true); 
+    });
+
+    window.addEventListener('appinstalled', () => {
+      // Log install to analytics
+      console.log('INSTALL: Success');
+    });
+  }, []);
+
+  const handleInstallClick = (e) => {
+      // Hide the app provided install promotion
+      setInstallable(false);
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+      });
+  };
+  
 
     const menu = (
         <Menu
@@ -50,14 +89,15 @@ export default function NavigationBar() {
                 </a>
               ),
             },
-            {
-              key: '5',
-              label: (
-                <a target="terms and conditions" rel="" href="https://bitsjoy.com/#/terms_and_conditions">
-                  Terms and conditions
-                </a>
-              )
-            }]}
+            // {
+            //   key: '5',
+            //   label: (
+            //     <a target="terms and conditions" rel="" href="https://bitsjoy.com/#/terms_and_conditions">
+            //       Terms and conditions
+            //     </a>
+            //   )
+            // }
+          ]}
             />
     )
 
@@ -65,12 +105,20 @@ export default function NavigationBar() {
     <>
         <Row style={{paddingTop: '13px', paddingBottom: '5px',  paddingLeft: '0px', position: 'fixed', width: '100vw', backgroundColor: 'white', zIndex: '9', left: '0px', fontFamily: 'raleway'}}> 
             <Col span={12} align="left">
-            <Link title="Profile page" to="/"><AppstoreOutlined style={{color: btnBackgroundColor, fontSize: '30px', paddingLeft: '20px'}}/><span style={{color: btnBackgroundColor}}>Bitsjoy</span> </Link>
+            <Link title="Profile page" to="/"><AppstoreOutlined style={{color: btnBackgroundColor, fontSize: '30px', paddingLeft: '20px'}}/> </Link>
                 {/* <sub> &nbsp;bitsjoy </sub> */}
+                 {/* {window.location.href.split('/')[window.location.href.split('/').length - 1]}   */}
             </Col>
             <Col span={12} align="right"> 
+            {installable && <DownloadOutlined title="download app" style={{fontSize: '20px', transform: 'translate(0px, 2px)'}}  onClick={handleInstallClick}/>}
+
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
             <BellOutlined style={{fontSize: '20px', transform: 'translate(0px, 1px)'}} />
            
+            &nbsp;
             &nbsp;
             &nbsp;
  

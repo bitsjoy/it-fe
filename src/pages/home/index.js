@@ -79,7 +79,7 @@ export default function Home() {
 
 <Card
   hoverable
-  style={{...CardStyle, paddingTop: '50px', opacity: '0.3'}}
+  style={{...CardStyle, paddingTop: '15px', opacity: '0.3'}}
 
   cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
 >
@@ -97,11 +97,11 @@ export default function Home() {
 
 <Card
   hoverable
-  style={{...CardStyle, paddingTop: '40px',  opacity: '0.3'}}
+  style={{...CardStyle, paddingTop: '29px',  opacity: '0.3'}}
 
-  cover={<img alt="writer" style={{width: '66%', margin: 'auto'}}  src={writer} />}
+  cover={<img alt="writer" style={{width: '50%', margin: 'auto'}}  src={writer} />}
 >
-<h3 align="center">New Habit
+<h3 align="center">Habit Tracker
 <br/>
   <sub style={{color: secondaryColor}}>Coming soon</sub></h3>
  </Card>
@@ -116,7 +116,7 @@ export default function Home() {
     hoverable
     style={{...CardStyle, paddingTop: '28px',  opacity: '0.3'}}
 
-    cover={<img alt="timer" style={{width: '45%', margin: 'auto'}}  src={time} />}
+    cover={<img alt="timer" style={{width: '66%', margin: 'auto'}}  src={time} />}
   >
    
   <h3 align="center">Time Manager
