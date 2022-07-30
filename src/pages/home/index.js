@@ -53,7 +53,33 @@ export default function Home() {
 <br/>
       <Row>
         <br/>
-        <Col id="home-1"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
+
+        <Col id="home-1" xs={{span: '24'}} md={{span: '6'}} align="center"> 
+
+<Card
+ onClick={(e)=>{
+  // onclick();
+  setTimeout(()=>{
+    navigate('/dailydiary')
+  }, 0)
+}}
+  hoverable
+  style={{...CardStyle, paddingTop: '15px', opacity: '1'}}
+
+  cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
+>
+<h3 align="center">Daily Diary
+<br/>
+<sub style={{color: successColor}}>LIVE</sub></h3>
+
+</Card>
+      </Col>
+
+
+
+
+
+        <Col id="home-2"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
         <Card
         onClick={(e)=>{
           // onclick();
@@ -72,29 +98,7 @@ export default function Home() {
 </Col>
 
 
- 
 
-
-<Col id="home-2" xs={{span: '24'}} md={{span: '6'}} align="center"> 
-
-<Card
- onClick={(e)=>{
-  // onclick();
-  setTimeout(()=>{
-    navigate('/dailydiary')
-  }, 0)
-}}
-  hoverable
-  style={{...CardStyle, paddingTop: '15px', opacity: '1'}}
-
-  cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
->
-<h3 align="center">Daily Diary
-<br/>
-  <sub style={{color: secondaryColor}}>Coming soon</sub></h3>
-
-</Card>
-      </Col>
 
 
 
