@@ -101,3 +101,11 @@ textarea {
   @keyframes bounce {
     to { transform: scale(1.04); }
 }
+
+#tiny-react_11781184631659189041366_ifr {
+  background-color: #6A5ACD;
+}
+
+#mood:hover {
+  cursor: pointer;
+}

@@ -22,6 +22,7 @@ import { btnBackgroundColor } from './uiConfig';
 import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
 import Fee from './pages/noteMaker/fee';
+import DailyDairy from './pages/dailydiary/DailyDairy';
 
 let deferredPrompt;  
     
@@ -33,7 +34,7 @@ function App() {
       
       <Router>
       <ToastContainer
-      position="bottom-right" />
+      position="top-center" />
       <NavigationBar /> 
       <br/>
       <br/>
@@ -45,6 +46,8 @@ function App() {
           <Route path='privacy_policy' exact element={<PrivacyPolicy />}></Route>
           <Route path='/terms_and_conditions' exact element={<MainForm/>}></Route>
           <Route path='/profile' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Profile />}></Route>
+
+          <Route path='/dailydiary' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <DailyDairy/>}></Route>
 
           <Route path='/notes' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <NoteMaker />}></Route>
           <Route path='/notes/buy' element={localStorage.getItem(bearer_token_key) === null ? <UserAuthentication/> : <Fee />}></Route>

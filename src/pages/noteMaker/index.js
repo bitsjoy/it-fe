@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Viewer from './viewer';
 import { Editor } from '@tinymce/tinymce-react';
 import ButtonPrimary from '../../components/Button';
-import {  DeleteOutlined, EditOutlined, LoadingOutlined, PlusCircleOutlined, ShareAltOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
+import {  DeleteOutlined, EditOutlined, PlusCircleOutlined, ShareAltOutlined, StepBackwardOutlined, SyncOutlined } from '@ant-design/icons';
 import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from './../../localStorageConfig';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { noteMaker } from '../../assets';
 import { btnBackgroundColor, secondaryColor } from '../../uiConfig'; 
 import { useNavigate } from 'react-router';
@@ -277,7 +277,7 @@ export default function NoteMaker() {
                   }} 
                   init={{  
                     init_instance_callback: function (editor) {
-                      document.querySelector('.tox-statusbar__wordcount').click();
+                           
                    },
                     selector: 'textarea#full-featured',
                      plugins: 'preview link media lists checklist linkchecker emoticons',
@@ -322,7 +322,6 @@ export default function NoteMaker() {
                     https://www.tiny.cloud/docs/plugins/premium/mentions/.
                     */ 
                     mentions_item_type: 'profile'
-                  
                   }}
                 />  
               </div>
@@ -364,8 +363,7 @@ export default function NoteMaker() {
                      setEditorLoaded(true);
                    }}
                    init={{ 
-                    init_instance_callback: function (editor) {
-                      document.querySelector('.tox-statusbar__wordcount').click();   
+                    init_instance_callback: function (editor) { 
                    },
                     selector: 'textarea#full-featured',
                     plugins: 'preview link media lists checklist linkchecker emoticons',
@@ -453,8 +451,9 @@ export default function NoteMaker() {
         {
                 !currentNoteId && currentNoteId != "" && <div align="left" style={{paddingTop: '20px', overflowX: 'hidden'}}>
                 
-                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} className="bounce" id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
-                  // document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
+                   document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                   document.getElementById("library").style.transform = 'translate(1000px, 0px)';
                   document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
                   setTimeout(()=>{
                     setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
@@ -469,7 +468,7 @@ export default function NoteMaker() {
             }
             
         {!edit && !newNoteWindow && 
-        <div align="left">
+        <div align="left" id="library">
          <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Library" : "Collections will be shown here"}</h3>  
          
         <Collapse style={{fontWeight: '700', width: 'auto',  border: '0px', display: 'inline'}} defaultActiveKey={['0']} onChange={()=>{}} align="left">
@@ -590,8 +589,9 @@ export default function NoteMaker() {
         {
                 !currentNoteId && currentNoteId != "" && <div align="left" style={{paddingTop: '20px', overflowX: 'hidden'}}>
                 
-                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} className="bounce" id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
-                  // document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                <ButtonPrimary styl={{fontSize: '15px', width: '100%'}} id="new-collection" text={<span> <PlusCircleOutlined /> New collection </span>} onClick={(e)=>{ 
+                   document.getElementById("new-collection").style.transform = 'translate(1000px, 0px)';
+                   document.getElementById("library").style.transform = 'translate(1000px, 0px)';
                   document.getElementById("notes-hero").style.transform = 'translate(0px, -1000px)';
                   setTimeout(()=>{
                     setCurrentBook(null); setNewNoteWindow(true); setCurrentNoteId(""); setCurrentNoteTitle('Sample note title'); setCurrentNoteBody("<p>This is the first note of this collection, you can delete it later"); 
@@ -609,7 +609,7 @@ export default function NoteMaker() {
 
 
 
-        {!edit && !newNoteWindow && <div align="left">
+        {!edit && !newNoteWindow && <div id="library" align="left">
         <br/> 
           <h3 style={{color: secondaryColor}} align="left">{Object.keys(notes? notes : {}).length !== 0 ? "Library" : "Collections will be shown here"}</h3> 
         

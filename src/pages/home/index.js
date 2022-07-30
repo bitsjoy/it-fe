@@ -78,8 +78,14 @@ export default function Home() {
 <Col id="home-2" xs={{span: '24'}} md={{span: '6'}} align="center"> 
 
 <Card
+ onClick={(e)=>{
+  // onclick();
+  setTimeout(()=>{
+    navigate('/dailydiary')
+  }, 0)
+}}
   hoverable
-  style={{...CardStyle, paddingTop: '15px', opacity: '0.3'}}
+  style={{...CardStyle, paddingTop: '15px', opacity: '1'}}
 
   cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
 >
