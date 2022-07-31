@@ -148,7 +148,7 @@ export default function DailyDairy() {
  
             </div>
 
-              <div style={{display: loadingEditor ? 'none' : 'block'}}><Editor  
+              <div style={{display: loadingEditor ? 'none' : 'block', marginBottom: '30vh'}}><Editor  
                   onInit={(evt, editor) => editorRef.current = editor}
                   initialValue={`${mainContent}`}
                   onChange={(e)=>{
@@ -195,7 +195,7 @@ export default function DailyDairy() {
                       { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
                       { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
                     ],
-                    height: 600,
+                    height: 630,
                     image_caption: true,
                     quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
                     noneditable_noneditable_class: 'mceNonEditable',
@@ -212,10 +212,9 @@ export default function DailyDairy() {
                   
                   }}
                 />
-                <br/>
-                <br/>
-                <br/>
+              
                 </div>
+                
                 </div>
             </Col> 
             <Col xs={{span: 24}} md={{span: 6}} align="right">
