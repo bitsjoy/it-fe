@@ -23,7 +23,7 @@ export default function DailyDairy() {
   const [ savingDiary, setSavingDiary ] = useState(false);
  
 
-  const [ date, setDate] = useState(moment(`${ndate.getFullYear()}/${ndate.getMonth()+1}/${ndate.getDate()}`).toString().split('00:00:00')[0]);
+  const [ date, setDate] = useState(moment(`${ndate.getFullYear()}/${ndate.getMonth()+1}/${ndate.getDate()}`).toString().split('00:00:00')[0].trim());
   const [ mainContent, setMainContent ] = useState('<p>type here ...</p>');
   const [ moodModal, setMoodModal ] = useState(false); 
   const [ moodNumber, setMoodNumber ] = useState(null); 
