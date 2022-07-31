@@ -10,6 +10,7 @@ import mc from './mc.png';
 import rupay from './rupay.png';
 import logo from './logo.png';
 import enter from './enter.svg';
+import ddbgmusic from './bgmusic.mp3';
 
 export {
     imgHome,
@@ -23,5 +24,6 @@ export {
     mc,
     rupay,
     logo,
-    enter
+    enter,
+    ddbgmusic
 }

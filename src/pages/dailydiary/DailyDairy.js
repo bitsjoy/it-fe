@@ -8,8 +8,8 @@ import axios from 'axios';
 import { API_BASE } from '../../apiConfig';
 import { bearer_token_key } from '../../localStorageConfig';
 import { toast } from 'react-toastify';
-import { ForwardFilled, ForwardOutlined, PauseOutlined, PlayCircleFilled, PlayCircleOutlined, PlaySquareOutlined, PlaySquareTwoTone, SmileOutlined, StepForwardFilled, SyncOutlined } from '@ant-design/icons';
-import { diary } from '../../assets';
+import { DownCircleFilled, DownCircleOutlined, ForwardFilled, ForwardOutlined, MinusCircleFilled, PauseOutlined, PlayCircleFilled, PlayCircleOutlined, PlaySquareOutlined, PlaySquareTwoTone, SmileOutlined, StepForwardFilled, SyncOutlined } from '@ant-design/icons';
+import { ddbgmusic, diary } from '../../assets';
 import { Link } from 'react-router-dom';
 
 export default function DailyDairy() {
@@ -17,20 +17,21 @@ export default function DailyDairy() {
   const [noDiaryErr, setNoDiaryErr] = useState(false);
 
   const editorRef = useRef(null);
-  const [noteHTMLCharacterLimit , sete] = useState(); 
+  let noteHTMLCharacterLimit = 1000000; 
   const ndate = new Date();
 
   const [ savingDiary, setSavingDiary ] = useState(false);
  
 
-  const [ date, setDate] = useState(moment(`${ndate.getFullYear()}-${ndate.getMonth()+1}-${ndate.getDate()}`).toString().split('00:00:00')[0]);
+  const [ date, setDate] = useState(moment(`${ndate.getFullYear()}/${ndate.getMonth()+1}/${ndate.getDate()}`).toString().split('00:00:00')[0]);
   const [ mainContent, setMainContent ] = useState('<p>type here ...</p>');
   const [ moodModal, setMoodModal ] = useState(false); 
   const [ moodNumber, setMoodNumber ] = useState(null); 
 
   const [ loadingEditor, setLoadingEditor ] = useState(true);
 
-  useEffect(()=>{
+  useEffect(()=>{  
+   
     setLoadingEditor(true);
     axios.get(API_BASE + "/api/dailydiary/getdiaryentrybydate/" + date, {
         headers: {
@@ -42,8 +43,12 @@ export default function DailyDairy() {
         if(res.status == 200){
             setMainContent(res.data.mainContent);
             document.getElementById('mood').innerHTML = res.data.mood == 0 || res.data.mood ==  null ? 'Mood?' : res.data.mood;
+            setMoodNumber(res.data.mood);
         }
         setLoadingEditor(false);
+ 
+
+
     }).catch((err) => {
         document.getElementById('mood').innerHTML = 'Mood?';
         setMainContent(`<div style="opacity: 0.8; color: ${secondaryColor}">${err.response.data.message} &nbsp; <span style="color:${btnBackgroundColor};">click anywhere to edit</span> ...</div>`);
@@ -64,8 +69,10 @@ export default function DailyDairy() {
             'Content-Type': 'application/json'
         }
     }).then((res)=>{ 
+        console.log(res);
         toast.success(res.data.message);
     setSavingDiary(false);
+  
     }).catch(err => {
         toast.error(err.response.data.message);
         setSavingDiary(false);
@@ -77,6 +84,8 @@ export default function DailyDairy() {
     setMoodNumber(mood);
   }
 
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
   return (
     <>
      <Row>
@@ -84,24 +93,45 @@ export default function DailyDairy() {
             <h3 id="word_limit_reached" style={{display: 'none', backgroundColor: '#FF9494', color: 'white'}}>Word limit reached</h3>
           </Col>
         </Row>
-        <Row style={{backgroundColor: ''}}>
+        <Row id="op" style={{backgroundColor: ''}}>
             <Col xs={{span: 24}} md={{span: 18}} align="center">
-                <div style={{width: '95%'}}> 
+                <div style={{width: '100%'}}> 
                 <h3 align="left" style={{fontWeight:'700', background: 'linear-gradient(to left,#f2f3f4, white)', padding: '4px 4px', color: btnBackgroundColor}}>
                     <Row>
-                        <Col align="left"  span={12}><span style={{color: secondaryColor}}></span>{date}</Col>
+                        <Col align="left"  span={12}>{
+                        
+                        date.split(" ")[1] == months[ndate.getMonth()] && date.split(" ")[2] == ndate.getDate() && date.split(" ")[3] == ndate.getFullYear() ? "Today" : date
+                        
+                        }</Col>
                         <Col align="right"  span={12}> 
-                        <PlaySquareOutlined style={{color: successColor}} />
-                        &nbsp;
-                        <PauseOutlined style={{color: secondaryColor}}/>
-                        &nbsp;
-                        <StepForwardFilled style={{color: btnBackgroundColor}} />
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
+<span>
+                        <sup style={{display: 'inline-block'}} id="moosic" className="bounce">&#x266b; </sup>
 
-                        <span id="mood" onClick={()=>{setMoodModal(true);}} style={{color: secondaryColor}}>Mood ?</span>
+                        <PlaySquareOutlined title="Play music" id="playMusicButton" onClick={()=>{
+                    document.getElementById("bgmusic").volume = 0.6; 
+
+                            document.querySelector("#bgmusic").play();
+
+                            document.querySelector('#pauseMusicButton').style.display = 'inline';
+                            document.querySelector('#moosic').style.display = 'block';
+                            document.querySelector('#moosic').style.paddingRight = '20px';
+                            document.querySelector('#playMusicButton').style.display = 'none';
+                        }} style={{color: successColor, display: 'inline'}}/>
+                        &nbsp;
+                        <PauseOutlined title="Pause music" id="pauseMusicButton" onClick={()=>{
+                            document.querySelector("#bgmusic").pause();
+                            document.querySelector('#pauseMusicButton').style.display = 'none';
+                            document.querySelector('#moosic').style.display = 'inline';
+                            document.querySelector('#moosic').style.paddingRight = '0px';
+                            document.querySelector('#playMusicButton').style.display = 'inline';
+                        }} style={{color: secondaryColor, display: 'none'}}/>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        </span>
+
+                        <span id="mood" onClick={()=>{setMoodModal(true);}} style={{color: secondaryColor}}>Mood?</span>
                         </Col>
                         </Row>
                 </h3>
@@ -135,7 +165,7 @@ export default function DailyDairy() {
                     // background-size: cover;
                    document.querySelector('.tox-edit-area__iframe').style.background = `url(https://cdn.pixabay.com/photo/2017/12/03/20/31/background-2995826_1280.png) center`;
                    document.querySelector('.tox-edit-area__iframe').style.backgroundSize = 'cover';
-                   setLoadingEditor(false);
+                   //setLoadingEditor(false);
 
                   }} 
                   init={{  
@@ -188,36 +218,47 @@ export default function DailyDairy() {
                 </div>
                 </div>
             </Col> 
-            <Col xs={{span: 24}} md={{span: 6}} align="left">
+            <Col xs={{span: 24}} md={{span: 6}} align="right">
                 <Row>
                   <Col xs={{span: 0}} md={{span: 24}}>  
-                  <ButtonPrimary  onClick={saveDiary} styl={{width: '100%'}} text={savingDiary ? 'loading' : 'Save'}></ButtonPrimary>
+                  <ButtonPrimary  onClick={saveDiary} styl={{width: '96%'}} text={savingDiary ? 'loading' : 'Save'}></ButtonPrimary>
 <br/>
 <br/>  </Col>
                 </Row>
  
-<br/>
+ 
                 
-                <h3 align="right" style={{color: secondaryColor}}>Time traveller<br/>
-                <sup style={{color:btnBackgroundColor}}>Revisit your daily diary, it's like travelling back in time </sup>
-                </h3>
-                <Calendar disabledDate={(d) => d > moment(`${ndate.getFullYear()}-${ndate.getMonth()+1}-${ndate.getDate()+1}`)} 
+                {/* <h3 align="right" style={{color: secondaryColor}}>See previous diary entries<br/> 
+                </h3> */}
+                <div id="calendar">
+                <Calendar disabledDate={(d) => d > moment(`${ndate.getFullYear()}/${ndate.getMonth()+1}/${ndate.getDate()+1}`)} 
                 onPanelChange={(value)=>{setDate(value.toString().substring(0, 15));window.scrollTo(0,0);}} 
                 onSelect={(value)=>{ setDate(value.toString().substring(0, 15)); window.scrollTo(0,0);}} style={{width: '100%'}} fullscreen={false} />
                 <br/>
-                <h3 style={{color: secondaryColor}} align="left"></h3>
+                
                 <br/>
                 <br/>
+                <audio id="bgmusic" style={{height: '0px'}} loop>
+                        <source src={ddbgmusic} type="audio/ogg" /> 
+                        Your browser does not support the audio element.
+                        </audio>
+                </div>
             </Col>
+ 
 
 
 {/* xs */}
-            <Col xs={{span: 24}} md={{span: 0}} align="left">
+            <Col xs={{span: 12}} md={{span: 0}}>
              <ButtonPrimary onClick={saveDiary} className = "bounce" styl={{position: 'fixed', bottom: '10px', right: '20px'}} text={savingDiary ? 'loading' : 'Save'}></ButtonPrimary>
+            </Col>
+            <Col xs={{span: 12}} md={{span: 0}}>
+             <Button type="text" onClick={()=>{ document.getElementById('calendar').scrollIntoView({
+  behavior: 'smooth'
+}); }} style={{position: 'fixed', bottom: '10px', left: '20px'}}>Calender  <DownCircleOutlined /></Button>
             </Col>
         </Row>
 
-        <Modal title="Current Mood" visible={moodModal} footer={[]} onCancel={()=>{setMoodModal(false)}}>
+        <Modal title="Mood" visible={moodModal} footer={[]} onCancel={()=>{setMoodModal(false)}}>
         <div  align="center">
             <h3>How was the day? <br/><sub>choose an emoji to record it in the diary</sub> </h3>
                         <Button title="very sad" style={{ fontSize: '25px'}} type="text" onClick={()=>{setMood('&#x1F613;', '-2'); setMoodModal(false);}}>&#x1F613;</Button>
