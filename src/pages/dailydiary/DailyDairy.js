@@ -57,7 +57,7 @@ export default function DailyDairy() {
     })
   }, [date])
 
-  const saveDiary = () => {
+  const saveDiary = () => { 
     setSavingDiary(true);
     axios.post(API_BASE + "/api/dailydiary/createDiaryEntry", {
         date: date,

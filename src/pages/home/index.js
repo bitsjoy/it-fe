@@ -44,13 +44,14 @@ export default function Home() {
   //}
 
   return (
-    <div id="apps-home" style={{minHeight: '100vh'}}>
-      <br/> 
+    <div id="apps-home" style={{}}>
+
+    
+      <br/>
+
         {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
    
-<br/>
-<br/>
-<br/>
+<br/> 
       <Row>
         <br/>
 
@@ -138,6 +139,21 @@ export default function Home() {
         </Col>
       </Row>
       <br/>
+      <br/>
+      <Row>
+        <Col span={24} align="center"  style={{fontFamily: 'Cinzel', color: 'dimgrey'}}>
+          <h1 style={{color: 'dimgrey'}}>
+            Bitsjoy
+          </h1>
+          <div style={{marginTop: '-20px', fontSize: '12px'}}>Simplicity with precision</div>
+
+        </Col>
+      </Row>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+     
       </div>
   )
 }

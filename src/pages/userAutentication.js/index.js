@@ -68,7 +68,7 @@ export default function UserAuthentication() {
               document.getElementById("signinButtonDiv"),
               { theme: "outlined", size: "large", text: "signin_with", width: '270', border: 'none' }  // customization attributes
             );
-             google.accounts.id.prompt(); // also display the One Tap dialog 
+            // google.accounts.id.prompt(); // also display the One Tap dialog 
  
     
   }, [])
@@ -81,7 +81,7 @@ export default function UserAuthentication() {
             <div align="left" style={{ width: '100vw', marginTop: '-20px', backgroundColor: 'white', zIndex: '999', position: 'fixed', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h1 style={{fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h1 style={{ color: secondaryColor }}> <span style={{color: btnBackgroundColor}}>Bitsjoy, </span>your software collection to organise & manage daily tasks better!</h1>
+                <h1 style={{ color: secondaryColor }}> <span style={{color: btnBackgroundColor}}>Bitsjoy, </span>a way for organising life better</h1>
             </div>
         </Col>
         {/* xs */}
@@ -89,7 +89,7 @@ export default function UserAuthentication() {
             <div align="left" style={{padding: '0px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1> */}
                 
-                <h2 style={{ color: secondaryColor }}><span style={{color: btnBackgroundColor}}>Bitsjoy, </span>your software collection to organise & manage daily tasks better!</h2>
+                <h2 style={{ color: secondaryColor }}><span style={{color: btnBackgroundColor}}>Bitsjoy, </span>a way for organising life better</h2>
             </div>
         </Col>
     </Row> 
@@ -207,7 +207,7 @@ export default function UserAuthentication() {
 
                 </div>  
                 </div>} 
-<h3 style={{fontWeight: '700', color: 'silver'}}>Products</h3> 
+{/* <h3 style={{fontWeight: '700', color: 'silver'}}>Products</h3>  */}
 <br/> 
 <Col xs={{span: 24}} md={{span: 0}} align="center">
                 {/* <img src={imgHome} style={{width :'90%', marginTop: '-30px'}} alt="Loading ..."/>   */}
@@ -324,6 +324,20 @@ export default function UserAuthentication() {
                 
             </Col>
             </Row>
+            <br/>
+            <Row>
+        <Col span={24} align="center"  style={{fontFamily: 'Cinzel', color: 'dimgrey'}}>
+          <h1 style={{color: 'dimgrey'}}>
+            Bitsjoy
+          </h1>
+          <div style={{marginTop: '-20px', fontSize: '12px'}}>Simplicity with precision</div>
+
+        </Col>
+      </Row>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </>
   )
 }
