@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/it-fe/static/css/main.d48f67a8.css",
+    "main.js": "/it-fe/static/js/main.f0e6f470.js",
+    "static/media/bgmusic.mp3": "/it-fe/static/media/bgmusic.ef22b392b318610119f7.mp3",
+    "index.html": "/it-fe/index.html",
+    "static/media/logo.png": "/it-fe/static/media/logo.4468d783bdcd0fbcfc7a.png",
+    "static/media/rupay.png": "/it-fe/static/media/rupay.3fe33f238c42a7b0a984.png",
+    "static/media/step2.svg": "/it-fe/static/media/step2.4e66c286a659857f6827c2d7140fecc2.svg",
+    "static/media/step1.svg": "/it-fe/static/media/step1.a3f1ecbc89e393426eb52a055043132a.svg",
+    "static/media/step4.svg": "/it-fe/static/media/step4.5af0bf435109ae71af716738f0865ee7.svg",
+    "static/media/time.svg": "/it-fe/static/media/time.5892eb02975995f6b22fd009e4f233ce.svg",
+    "static/media/step0.svg": "/it-fe/static/media/step0.96b4ac69dd9b5c3e541cdf536da86bd2.svg",
+    "static/media/step3.svg": "/it-fe/static/media/step3.87546a30db5e1cfc659b31c44e7cce6d.svg",
+    "static/media/writer.svg": "/it-fe/static/media/writer.e617a996d40395d2ccbe240663506d4c.svg",
+    "static/media/noteMaker.svg": "/it-fe/static/media/noteMaker.bd87e5dca5998838119b02b4cccf650b.svg",
+    "static/media/diary.svg": "/it-fe/static/media/diary.418356bece098b4bae21141943c28e88.svg",
+    "static/media/imgHome.svg": "/it-fe/static/media/imgHome.7cf275ff6124bcda7afacc341302c7ec.svg",
+    "static/media/enter.svg": "/it-fe/static/media/enter.79872296556418253ca4b3289f856112.svg",
+    "static/media/upi.webp": "/it-fe/static/media/upi.4239d0b35fd728ae798d.webp",
+    "static/media/arrow.svg": "/it-fe/static/media/arrow.3916af6321cd33d5f126a110d78901de.svg",
+    "main.d48f67a8.css.map": "/it-fe/static/css/main.d48f67a8.css.map",
+    "main.f0e6f470.js.map": "/it-fe/static/js/main.f0e6f470.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d48f67a8.css",
+    "static/js/main.f0e6f470.js"
+  ]
+}
