@@ -89,8 +89,7 @@ export default function UserAuthentication() {
             <br/> 
             <br/> 
             <div>
-            <h2 style={{ color: btnBackgroundColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Do you need your own mobile &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>App</h1> &nbsp; or a &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Website</h1> &nbsp; with a great &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Domain Name</h1> &nbsp; or &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Marketing and Advertizing</h1> &nbsp; for yourself or your business or product/s &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>?</h1><br/>
-            
+            <h2 style={{ color: btnBackgroundColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Do you need a Unique mobile &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>App</h1> &nbsp; or a &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Website</h1> &nbsp; with a great &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Domain Name</h1> &nbsp; or &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Marketing and Advertizing</h1> &nbsp; for yourself or your business or product/s &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>?</h1><br/>
             </span></h2>  
             </div>
         </Col>
@@ -281,7 +280,7 @@ export default function UserAuthentication() {
       <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>2</b></span>
       &nbsp;
       We custom design it <br/>
-      for you
+      for you, with you
                 </Col>
                
                 <Col xs={{span: 0}} md={{span: 5}} align="center">
