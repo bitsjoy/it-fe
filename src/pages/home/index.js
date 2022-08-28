@@ -51,108 +51,12 @@ export default function Home() {
 
         {/* <h1 style={{fontFamily: 'Italianno'}}>{date.getHours() < 12 ? <span>Good &nbsp; Morning! </span>: date.getHours() < 16 ? <span>Good &nbsp;Afternoon! </span>: <span>Good &nbsp;Evening! </span>}</h1> */}
    
-<br/> 
-      <Row>
-        <br/>
-
-        <Col id="home-1" xs={{span: '24'}} md={{span: '6'}} align="center"> 
-
-<Card
- onClick={(e)=>{
-  // onclick();
-  setTimeout(()=>{
-    navigate('/dailydiary')
-  }, 0)
-}}
-  hoverable
-  style={{...CardStyle, paddingTop: '15px', opacity: '1'}}
-
-  cover={<img alt="diary" style={{width: '50%', margin: 'auto'}}  src={diary} />}
->
-<h3 align="center">Daily Diary
-<br/>
-<sub style={{color: successColor}}>LIVE</sub></h3>
-
-</Card>
-      </Col>
-
-
-
-
-
-        <Col id="home-2"  xs={{span: '24'}} md={{span: '6'}} align="center"> 
-        <Card
-        onClick={(e)=>{
-          // onclick();
-          setTimeout(()=>{
-            navigate('/notes')
-          }, 0)
-        }}
-    hoverable
-    style={{...CardStyle, paddingTop: '35px'}}
-    cover={<img alt="note-maker" style={{width: '42%', margin: 'auto'}} src={noteMaker} />}
-  >
-  <h3 align="center">Notes
-  <br/>
-  <sub style={{color: successColor}}>LIVE</sub></h3>
-  </Card>
-</Col>
-
-
-
-
-
-
-
-      <Col id="home-3" xs={{span: '24'}} md={{span: '6'}}> 
-
-<Card
-  hoverable
-  style={{...CardStyle, paddingTop: '29px',  opacity: '0.3'}}
-
-  cover={<img alt="writer" style={{width: '50%', margin: 'auto'}}  src={writer} />}
->
-<h3 align="center">Habit Tracker
-<br/>
-  <sub style={{color: secondaryColor}}>Coming soon</sub></h3>
- </Card>
-      </Col>
-
-
-
-
-
-        <Col id="home-4" xs={{span: '24'}} md={{span: '6'}}>  
-  <Card
-    hoverable
-    style={{...CardStyle, paddingTop: '28px',  opacity: '0.3'}}
-
-    cover={<img alt="timer" style={{width: '66%', margin: 'auto'}}  src={time} />}
-  >
-   
-  <h3 align="center">Time Manager
-  <br/>
-  <sub style={{color: secondaryColor}}>Coming soon</sub>
-  </h3>
-  </Card>
-
-        </Col>
-      </Row>
-      <br/>
-      <br/>
-      <Row>
-        <Col span={24} align="center"  style={{fontFamily: 'Cinzel', color: 'dimgrey'}}>
-          <h1 style={{color: 'dimgrey'}}>
-            Bitsjoy
-          </h1>
-          <div style={{marginTop: '-20px', fontSize: '12px'}}>Simplicity with precision</div>
-
-        </Col>
-      </Row>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+<br/>  
+<br/>  
+        Oops! Something went wrong.
+        <br/> 
+        <br/> 
+        contact us at <b>support@bitsjoy.com </b>
      
       </div>
   )

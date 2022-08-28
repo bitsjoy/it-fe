@@ -5,6 +5,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 100px;
+  background: linear-gradient(to bottom right, white, white, white, white) !important;
 }
 
 code {
@@ -53,7 +54,7 @@ textarea {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 0px;
 }
 
 /* Track */
@@ -88,18 +89,18 @@ textarea {
  
 .bounce {    
     opacity: 1;  
-    -webkit-animation: bounce 0.5s infinite alternate;
-    -moz-animation: bounce 0.5s infinite alternate;
-    animation: bounce 0.5s infinite alternate;
+    -webkit-animation: bounce 1s infinite alternate;
+    -moz-animation: bounce 1s infinite alternate;
+    animation: bounce 1s infinite alternate;
   }
   @-webkit-keyframes bounce {
-    to { -webkit-transform: scale(1.04); }
+    to { -webkit-transform: scale(1.08); }
   }
   @-moz-keyframes bounce {
-    to { -moz-transform: scale(1.04); }
+    to { -moz-transform: scale(1.08); }
   }
   @keyframes bounce {
-    to { transform: scale(1.04); }
+    to { transform: scale(1.08); }
 }
 
 #tiny-react_11781184631659189041366_ifr {
@@ -109,3 +110,9 @@ textarea {
 #mood:hover {
   cursor: pointer;
 }
+
+a>span:hover {
+  background-color: #6A5ACD;
+  color: white !important;
+}
+ 

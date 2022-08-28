@@ -116,7 +116,7 @@ export default function NavigationBar() {
             &nbsp;
             &nbsp;
 
-            <BellOutlined style={{fontSize: '20px', transform: 'translate(0px, 1px)'}} />
+            <BellOutlined style={{fontSize: '23px', transform: 'translate(0px, 1px)'}} />
            
             &nbsp;
             &nbsp;
@@ -126,7 +126,7 @@ export default function NavigationBar() {
             <Dropdown overlay={menu}>
                 <a onClick={e => e.preventDefault()}>
                 <Space>
-                     <InfoCircleFilled style={{fontSize: '18px'}}/>
+                     <InfoCircleFilled style={{fontSize: '22px'}}/>
                 </Space>
                 </a>
             </Dropdown>

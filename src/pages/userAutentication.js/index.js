@@ -6,10 +6,10 @@ import ButtonPrimary from '../../components/Button'
 import { bearer_token_key } from '../../localStorageConfig'; 
 import jwt_decode from 'jwt-decode';
 import { toast } from 'react-toastify';
-import { btnBackgroundColor, secondaryColor, successColor } from '../../uiConfig';
+import { btnBackgroundColor, btnTextColor, secondaryColor, successColor } from '../../uiConfig';
 import { diary, dq, enter, noteMaker, time, writer } from '../../assets';
-import { SyncOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { AndroidFilled, AndroidOutlined, AppleFilled, BookFilled, FacebookFilled, GlobalOutlined, GoogleCircleFilled, GoogleOutlined, InstagramFilled, LaptopOutlined, MobileFilled, MobileOutlined, SyncOutlined, WindowsFilled } from '@ant-design/icons';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function UserAuthentication() {
  
@@ -31,6 +31,8 @@ export default function UserAuthentication() {
  
 
   function handleCredentialResponse(response) {
+    window.scrollTo(0,0);
+
     setGoogleSignLoading(true);
 
     const credentialsObject = jwt_decode(response.credential);
@@ -43,6 +45,7 @@ export default function UserAuthentication() {
         email: credentialsObject.email
     }).then(res => {
         console.log(res + "kkkk");
+        window.scrollTo(0,0);
        // toast.error('Please login with email and password');
         setEmail(credentialsObject.email);
         setAuthType(0);
@@ -66,7 +69,7 @@ export default function UserAuthentication() {
             });
             google.accounts.id.renderButton(
               document.getElementById("signinButtonDiv"),
-              { theme: "outlined", size: "large", text: "signin_with", width: '270', border: 'none' }  // customization attributes
+              { theme: "filled_blue", size: "small", text: "signin", width: '80', border: 'none' }  // customization attributes
             );
             // google.accounts.id.prompt(); // also display the One Tap dialog 
  
@@ -77,19 +80,18 @@ export default function UserAuthentication() {
     <> 
     <Row>
         {/* md */}
-        <Col xs={{span: 0}} md={{span: 24}} style={{marginBottom: '100px'}}>
-            <div align="left" style={{ width: '100vw', marginTop: '-20px', backgroundColor: 'white', zIndex: '999', position: 'fixed', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
-            {/* <h1 style={{fontFamily: 'Italianno'}}>Hello!</h1> */}
-                
-                <h1 style={{ color: secondaryColor }}> <span style={{color: btnBackgroundColor}}>Bitsjoy, </span>a way for organising life better</h1>
+        <Col xs={{span: 0}} md={{span: 24}} style={{marginBottom: '100px', backgroundColor: 'white'}}>
+            <div align="left" style={{ width: '100vw', marginTop: '-20px', zIndex: '999', position: 'fixed', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600', marginBottom: '0px' }}>
+            {/* <h2 style={{fontFamily: 'Italianno'}}>Hello!</h2> */} 
+                <h1 style={{ color: secondaryColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}> <span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Bitsjoy, </span>software solutions for your business or personal needs.</h1>
             </div>
         </Col>
         {/* xs */}
-        <Col xs={{span: 24}} md={{span: 0}}>
+        <Col xs={{span: 24}} md={{span: 0}}> 
             <div align="left" style={{padding: '0px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
-            {/* <h1 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h1> */}
+            {/* <h2 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h2> */}
                 
-                <h2 style={{ color: secondaryColor }}><span style={{color: btnBackgroundColor}}>Bitsjoy, </span>a way for organising life better</h2>
+                <h2 style={{ color: secondaryColor, backgroundColor: 'white' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Bitsjoy, </span>software solutions for your business or personal needs.</h2>
             </div>
         </Col>
     </Row> 
@@ -193,7 +195,12 @@ export default function UserAuthentication() {
                     }}/>   
                     <br/>
                     {authType == 0 && 
+                    <>
                 <Link to="/contact_us"> <h5 align="left" style={{color: secondaryColor, marginTop: '10px'}}>Forgot password?</h5></Link>
+                <br/>
+                <br/>
+                </>
+                
             }
                     {/* { authType === 1 ? <Button size="large" onClick={()=>{
                         setEmail(null);
@@ -211,133 +218,260 @@ export default function UserAuthentication() {
 <br/> 
 <Col xs={{span: 24}} md={{span: 0}} align="center">
                 {/* <img src={imgHome} style={{width :'90%', marginTop: '-30px'}} alt="Loading ..."/>   */}
+               
                 <Carousel afterChange={()=>{}} autoplay={true} effect="fade" speed={600} pauseOnHover={false} dots={false}>
                 <div>
       <img src={noteMaker} style={{height :'150px'}} alt="Loading ..."/>  
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Note Maker</h1>
+      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Mobile Applications</h2>
       </div>
       <div>
       <img src={diary} style={{height :'150px'}} alt="Loading ..."/>  
 
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Daily Diary</h1>
+      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Personal Website /<br/> Portfolio</h2>
       </div>
       <div>
       <img src={writer} style={{height :'150px'}} alt="Loading ..."/>  
 
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Habit Tracker</h1>
-      </div>
-      <div>
-      <img src={time} style={{height :'150px'}} alt="Loading ..."/>  
-
-      <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Time Manager</h1>
+      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Digital Stock Register</h2>
       </div>
     </Carousel>
     <div align="left" style={{marginTop: '-15px', color: secondaryColor}}>
-    Our products are <span style={{color: successColor}}>free to use</span>
         
     </div>
 
             </Col>
-<Col xs={{span: 0}} md={{span: 24}} align="center" style={{marginBottom: '0px', height: 'auto'}}>
-<div align="center" style={{width: '38%'}}>
+
+            <Row>
+                <Col xs={{span: 0}} md={{span: 24}}>
+                    <div align="left" style={{marginTop: '-50px'}}>
+                    <div align="left" style={{color: secondaryColor, fontWeight: '700'}}>  
+                   </div> 
+                       <br/>
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Mobile Applicationss &nbsp; <AndroidFilled/> </span></a>
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Portfolio website &nbsp; <LaptopOutlined /> <MobileOutlined /> </span></a>
+                        
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Personal utility website &nbsp; <GlobalOutlined /></span></a>
+                         <br/>
+                        <br/>
+                        
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Digital stock register &nbsp; <BookFilled /> </span></a>
+                       
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Marketing and Advertizing &nbsp; <InstagramFilled/> <FacebookFilled /> <GoogleOutlined/> </span></a>
+                        
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Desktop applications &nbsp; <WindowsFilled /> </span></a>
+                        
+                        <a href="#fa" onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}} title="Search Engine Optimization">S.E.O. &nbsp; <GlobalOutlined /> </span></a> 
+
+<span onClick={(e)=>{
+                            e.preventDefault();
+                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 10px', color: 'grey', marginRight: '10px'}} title="Search Engine Optimization">and more ...</span></span>
+                    </div>
+                    <br/>
+                    <br/> 
+                    <br/> 
+     
+                </Col>
+
+                <Col xs={{span: 0}} md={{span: 24}} align="center" style={{marginTop: '50px', marginLeft: '0px'}}> 
+                        <div style={{ width: '100vw', paddingTop: '100px', marginLeft: '-20px', background: 'url(https://images.unsplash.com/photo-1637825891028-564f672aa42c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)', backgroundRepeat: 'no-repeat', backgroundPosition: 'right top', backgroundSize: '100%', backgroundAttachment: 'fixed'}}> 
+                <div align="right" style={{background: 'white', width: '50%', color: secondaryColor, padding: '40px', borderLeft: `11px solid ${secondaryColor}`, borderRight: `0px solid ${secondaryColor}`, opacity: '1'}} className="bounc">
+     <h1>Testimonials</h1>
+     <br/>
+     <div style={{fontSize: '19px', color: '#c71585' }}>
+                         <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp;
+                         For every minute spent organizing, an hour is earned.
+                         <div style={{color: 'grey', width: '100%'}} align="right"> 
+                         <br/>
+                    - Benjamin Franklin</div>
+                    </div>
+<div id="quotation"></div>
+
+     <br/>
     
-<Carousel afterChange={()=>{}} autoplay={true} effect="fade" speed={600} pauseOnHover={false} dots={false}>
-      <div>
-      <img src={noteMaker} style={{height :'230px'}} alt="Loading ..."/>  
-      <br/>
-      <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, width: '80%', paddingBottom: '10px'}}>Note Maker</h1>
+      </div>
+
+<br/>
+<br/>
+<br/>
+<br/>
       
+     <div align="right" style={{background: 'white', width: '50%', color: btnBackgroundColor, padding: '40px 40px', borderLeft: `11px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, opacity: '1', background: 'linear-gradient(to right, white, white, white, white)'}} className="bounc">
+    
+     <h1>Tell us what you need!</h1>
+     <br/>
+     <h3 style={{color: 'grey'}}>Click on the button below to get quotation for your requirements.</h3>
+     We reply within 24 hours 
+     <br/>
+     <br/>
+     <span style={{padding: '10px 6px', border: `1px solid ${btnBackgroundColor}`}}>
+     <ButtonPrimary className="bounce" text="Get quotation" styl={{backgroundColor: btnBackgroundColor}}></ButtonPrimary>
+     </span>
+     <br/>
+     <br/> 
       </div>
-      <div>
-      <img src={diary} style={{height :'230px'}} alt="Loading ..."/>  
       <br/>
-
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, width: '80%', paddingBottom: '10px'}}>Daily Diary</h1>
-      </div>
-      <div>
-      <img src={writer} style={{height :'230px'}} alt="Loading ..."/>  
       <br/>
-
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, width: '80%', paddingBottom: '10px'}}>Habit Tracker</h1>
-      </div>
-      <div>
-      <img src={time} style={{height :'230px'}} alt="Loading ..."/>  
       <br/>
-
       <br/>
-      <h1 style={{borderBottom: `1px solid ${btnBackgroundColor}`, width: '80%', paddingBottom: '10px'}}>Time Manager</h1>
-      </div>
-    </Carousel>
-    <div align="left" style={{marginTop: '-15px', color: secondaryColor, width: '80%', fontWeight: '700'}}> 
-    Our products are <span style={{color: successColor}}>free to use</span>
-    </div>
-    </div>
+      <br/>
+      
+          <h2 align="center" style={{fontFamily: 'Cinzel', color: 'white'}}>
+            Our clients
+          </h2>
+          <br/>
+          <Row>
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={6}>
+                <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="https://archanadesign.com">
+                    archanadesign.com <br/>
+                    ( Portfolio )
+                    </a></h3>
             </Col>
-                    
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={6}>
+            <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="#">
+                R.K. Minerals<br/> ( Stock Register )
+                </a></h3>
+            </Col>
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={6}>
+            <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="https://alicebanting.com">
+                alicebanting.com<br/>
+               ( Professional Website )
+                </a></h3>
+            </Col>
+            
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={6}>
+            <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="www.alicebanting.com">
+                R.K. Minerals<br/> ( Stock Register )
+                </a></h3>
+            </Col>
+          </Row>
+          <br/>
+          <br/>
            
+          </div> 
+    
+      </Col> 
+ 
+   
+
+      <Col xs={{span: 24}} md={{span: 0}} align="center" style={{marginTop: '-50px', paddingTop: '100px'}}> 
+ <div style={{width: '100vw', marginLeft: '-20px', background: 'url(https://images.unsplash.com/photo-1637825891028-564f672aa42c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover'}}>
+      <div align="center" style={{border: '0px solid grey', width: '100%', color: 'white', padding: '0px 30px', borderLeft: `0px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, opacity: '1'}} className="bounc">
+     <br/>
+     <br/>
+    
+     <h2 style={{color: 'white'}}>Tell us what you need!</h2>
+     <br/>
+     <h3 style={{color: 'silver'}}>Click on the button below to get quotation for your requirements.</h3>
+     <br/> 
+     We reply with in 24 hours 
+     <br/>
+     <br/>
+     <span style={{padding: '10px 5px', border: `1px solid ${btnBackgroundColor}`}}>
+     <ButtonPrimary className="bounce" text="Get quotation" styl={{backgroundColor: btnBackgroundColor}}></ButtonPrimary>
+     </span>
+     <br/>
+     <br/>
+     <br/>
+      </div> 
+      <br/>
+      <br/>
+      <h3 align="center" style={{fontFamily: 'Cinzel', color: 'white'}}>
+            Our clients
+          </h3>
+      <br/>
+      <Row>
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
+                <h3 align="left" style={{ borderLeft: '0px solid white', padding: '20px 20px', width: '70%'}}><a style={{color: 'white'}} target="client" href="https://archanadesign.com">
+                    archanadesign . com <br/>
+                    ( Portfolio )
+                    </a></h3>
             </Col>
-            <Col xs={{span: 24}} md={{span: 24}} align="center">
-            <br/> 
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
+            <h3 align="right" style={{ borderRight: '0px solid white', padding: '20px 20px', width: '70%'}}><a style={{color: 'white'}} target="client" href="#">
+                R.K. Minerals<br/> ( Stock Register )
+                </a></h3>
+            </Col>
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
+            <h3 align="left" style={{ borderLeft: '0px solid white', padding: '20px 20px', width: '70%'}}><a style={{color: 'white'}} target="client" href="https://alicebanting.com">
+                alicebanting . com<br/>
+               ( Professional Website )
+                </a></h3>
+            </Col>
+            
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
+            <h3 align="right" style={{ borderRight: '0px solid white', padding: '20px 20px', width: '70%'}}><a style={{color: 'white'}} target="client" href="www.alicebanting.com">
+                R.K. Minerals<br/> ( Stock Register )
+                </a></h3>
+            </Col>
+            <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
+            <div align="left" style={{width: '70%', padding: '20px'}}>and counting . . .</div>
+            </Col>
+          </Row>
+          <br/>
+          <br/>
+      </div>
+    
+      </Col> 
+      </Row>
+
+
+ 
+
+            </Col> 
             {/* <div align="left" style={{padding: '0px', width: '270px', color: btnBackgroundColor}}>Sign in or create an account</div>
 
             <div>
                 <img src={enter} style={{width: '150px', display: 'inline'}} alt="enter" />
                 <br/>
                 <br/> */}
-                <br/>
-                <br/>
-
-                <span  id="signinButtonDiv" style={{display: 'inline', padding: '0px', width: '270px', border: '0px solid silver', borderRadius: '4px'}}></span>
+                <span id="signinButtonDiv" style={{display: 'block', borderRadius: '0px', position: 'fixed', top: '16px', right: '95px', zIndex: '9999', background: 'blue'}}></span>
             
+ 
 
-                <br/>
-                <br/>
-                <br/>   <br/>
-                <br/> 
                 {/* <img src={imgHome} style={{marginRight: '0px', width :'45%'}} alt="Loading ..."/> */}
-                <div style={{width: '90%', borderRadius: '15px', borderTop: `0px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, padding: '0px'}}>
-                    <div style={{fontSize: '19px', color: '#c71585' }} align="center">
-                         <img src={dq} style={{width: '50px', marginTop: '-40px'}} alt="''"/> &nbsp;
-                         For every minute spent organizing, an hour is earned. &nbsp; &nbsp; &nbsp;
-                         <span style={{color: 'grey'}}> 
-                    - Benjamin Franklin</span>
-                    </div>
-                </div>
-            </Col>
+                 
             </Row> 
-<Row>
-            <Col xs={{span: 24}} md={{span: 24}} align="center">
-            <br/>
-                <br/>
-                <br/>
-                <br/>
-              
-
-
-                
-            </Col>
-            </Row>
-            <br/>
+  
             <Row>
-        <Col span={24} align="center"  style={{fontFamily: 'Cinzel', color: 'dimgrey'}}>
-          <h1 style={{color: 'dimgrey'}}>
+        <Col xs={{span: 24}} md={{span: 24}} align="center"  style={{fontFamily: 'Cinzel', color: 'dimgrey'}}>
+             <br/>
+             <br/>
+          <h2 style={{color: 'dimgrey'}}>
             Bitsjoy
-          </h1>
+          </h2>
           <div style={{marginTop: '-20px', fontSize: '12px'}}>Simplicity with precision</div>
-
+<br/>
+<br/>
+<br/>
         </Col>
-      </Row>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      </Row> 
     </>
   )
 }
