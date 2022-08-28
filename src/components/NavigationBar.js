@@ -111,7 +111,7 @@ export default function NavigationBar() {
                  {/* {window.location.href.split('/')[window.location.href.split('/').length - 1]}   */}
             </Col>
             <Col span={16} align="right"> 
-            {installable && <DownloadOutlined title="download app" style={{fontSize: '20px', transform: 'translate(0px, 2px)'}}  onClick={handleInstallClick}/>}
+            {installable && false && <DownloadOutlined title="download app" style={{fontSize: '20px', transform: 'translate(0px, 2px)'}}  onClick={handleInstallClick}/>}
 
             &nbsp; 
 

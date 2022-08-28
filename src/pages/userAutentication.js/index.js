@@ -252,7 +252,7 @@ export default function UserAuthentication() {
      <div style={{fontSize: '18px', color: '#c71585' }}>
                          <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp; 
                          I am a designer and I needed a portfolio website <br/> ( www.archanadesign.com ) <br/>
-                         Bitsjoy helped me with finding the right domain name to making my portfolio online, it was a hassel free process.
+                         Bitsjoy helped me from finding the right domain name to making my portfolio online, it was a hassel free process.
                          
                          <div style={{color: 'grey', width: '100%'}} align="right"> 
                          <br/>
@@ -369,7 +369,7 @@ export default function UserAuthentication() {
      <div style={{fontSize: '19px', color: '#c71585' }}>
                          <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp; &nbsp;
                          I am a designer and I needed a portfolio website <br/> ( www.archanadesign.com ) <br/>
-                         Bitsjoy helped me with finding the right domain name to making my portfolio online, it was a hassel free process.
+                         Bitsjoy helped me from finding the right domain name to making my portfolio online, it was a hassel free process.
                          
                          <div style={{color: 'grey', width: '100%'}} align="right"> 
                          <br/>
