@@ -1,9 +1,10 @@
  
-import { AppstoreOutlined, BellFilled, BellOutlined, ContactsFilled, DownloadOutlined, DownOutlined, InfoCircleFilled, InfoOutlined, MoreOutlined, PhoneOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, BellFilled, BellOutlined, ContactsFilled, DownloadOutlined, DownOutlined, InfoCircleFilled, InfoOutlined, MoreOutlined, PhoneOutlined, PicRightOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Col, Dropdown, Menu, Row, Space } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom' 
 import { btnBackgroundColor } from '../uiConfig'
+import ButtonPrimary from './Button'
 
 
 let deferredPrompt;  
@@ -104,29 +105,36 @@ export default function NavigationBar() {
   return (
     <>
         <Row style={{paddingTop: '13px', paddingBottom: '5px',  paddingLeft: '0px', position: 'fixed', width: '100vw', backgroundColor: 'white', zIndex: '9', left: '0px', fontFamily: 'raleway'}}> 
-            <Col span={12} align="left">
+            <Col span={8} align="left">
             <Link title="Profile page" to="/"><AppstoreOutlined style={{color: btnBackgroundColor, fontSize: '30px', paddingLeft: '20px'}}/> </Link>
-                {/* <sub> &nbsp;bitsjoy </sub> */}
+                <span style={{fontFamily: 'Cinzel'}}> &nbsp;BITSJOY </span> 
                  {/* {window.location.href.split('/')[window.location.href.split('/').length - 1]}   */}
             </Col>
-            <Col span={12} align="right"> 
+            <Col span={16} align="right"> 
             {installable && <DownloadOutlined title="download app" style={{fontSize: '20px', transform: 'translate(0px, 2px)'}}  onClick={handleInstallClick}/>}
 
-            &nbsp;
-            &nbsp;
-            &nbsp;
+            &nbsp; 
 
-            <BellOutlined style={{fontSize: '23px', transform: 'translate(0px, 1px)'}} />
+           <a href="https://forms.gle/unap3kkUsyS5YoU58"> 
+
+     
+     <ButtonPrimary className="bounc" text="Get quotation" styl={{backgroundColor: btnBackgroundColor, display: 'inline'}}></ButtonPrimary>
+    
+     </a> 
+     &nbsp;
+            &nbsp;
+            &nbsp; 
+            {/* <BellOutlined style={{fontSize: '23px', transform: 'translate(0px, 1px)'}} />
            
             &nbsp;
             &nbsp;
-            &nbsp;
+            &nbsp; */}
  
             <div style={{marginRight: '20px', display: 'inline-block'}}>
             <Dropdown overlay={menu}>
-                <a onClick={e => e.preventDefault()}>
-                <Space>
-                     <InfoCircleFilled style={{fontSize: '22px'}}/>
+                <a href="#f" onClick={e => e.preventDefault()}>
+                <Space> 
+                     <PicRightOutlined style={{fontSize: '25px', color: btnBackgroundColor, transform: 'translate(0px, 5px)'}}/>
                 </Space>
                 </a>
             </Dropdown>

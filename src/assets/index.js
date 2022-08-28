@@ -11,6 +11,12 @@ import rupay from './rupay.png';
 import logo from './logo.png';
 import enter from './enter.svg';
 import ddbgmusic from './bgmusic.mp3';
+import step0 from './step0.svg';
+import step1 from './step1.svg';
+import step2 from './step2.svg';
+import step3 from './step3.svg';
+import step4 from './step4.svg';
+import arrow from './arrow.svg';
 
 export {
     imgHome,
@@ -25,5 +31,11 @@ export {
     rupay,
     logo,
     enter,
-    ddbgmusic
+    ddbgmusic,
+    step0,
+    step1,
+    step2,
+    step3,
+    step4,
+    arrow
 }

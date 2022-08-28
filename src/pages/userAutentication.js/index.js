@@ -7,8 +7,8 @@ import { bearer_token_key } from '../../localStorageConfig';
 import jwt_decode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { btnBackgroundColor, btnTextColor, secondaryColor, successColor } from '../../uiConfig';
-import { diary, dq, enter, noteMaker, time, writer } from '../../assets';
-import { AndroidFilled, AndroidOutlined, AppleFilled, BookFilled, FacebookFilled, GlobalOutlined, GoogleCircleFilled, GoogleOutlined, InstagramFilled, LaptopOutlined, MobileFilled, MobileOutlined, SyncOutlined, WindowsFilled } from '@ant-design/icons';
+import { diary, dq, enter, noteMaker, step0, step1, step2, step3, step4, time, writer } from '../../assets';
+import { AndroidFilled, AndroidOutlined, AppleFilled, BookFilled, FacebookFilled, GlobalOutlined, GoogleCircleFilled, GoogleOutlined, InstagramFilled, LaptopOutlined, MobileFilled, MobileOutlined, PicRightOutlined, RightOutlined, RightSquareOutlined, SwapRightOutlined, SyncOutlined, WindowsFilled } from '@ant-design/icons';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function UserAuthentication() {
@@ -81,9 +81,17 @@ export default function UserAuthentication() {
     <Row>
         {/* md */}
         <Col xs={{span: 0}} md={{span: 24}} style={{marginBottom: '100px', backgroundColor: 'white'}}>
-            <div align="left" style={{ width: '100vw', marginTop: '-20px', zIndex: '999', position: 'fixed', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600', marginBottom: '0px' }}>
-            {/* <h2 style={{fontFamily: 'Italianno'}}>Hello!</h2> */} 
-                <h1 style={{ color: secondaryColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}> <span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Bitsjoy, </span>software solutions for your business or personal needs.</h1>
+            {/* <div align="left" style={{ width: '100vw', marginTop: '-20px', zIndex: '999', position: 'fixed', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600', marginBottom: '0px' }}>
+           
+                <h1 style={{ color: secondaryColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}> <span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Bitsjoy </span></h1>
+            </div> */}
+            <br/>
+            <br/> 
+            <br/> 
+            <div>
+            <h2 style={{ color: btnBackgroundColor, backgroundColor: 'white', marginLeft: '-20px', paddingLeft: '20px' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Do you need your own mobile &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>App</h1> &nbsp; or a &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Website</h1> &nbsp; with a great &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Domain Name</h1> &nbsp; or &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>Marketing and Advertizing</h1> &nbsp; for yourself or your business or product/s &nbsp; <h1 style={{display: 'inline', color: secondaryColor}}>?</h1><br/>
+            
+            </span></h2>  
             </div>
         </Col>
         {/* xs */}
@@ -91,7 +99,7 @@ export default function UserAuthentication() {
             <div align="left" style={{padding: '0px 20px 20px 0px', border: `0px solid ${btnBackgroundColor}`, fontFamily: 'Poppins', fontWeight: '600' }}>
             {/* <h2 style={{color: '', fontFamily: 'Italianno'}}>Hello!</h2> */}
                 
-                <h2 style={{ color: secondaryColor, backgroundColor: 'white' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}>Bitsjoy, </span>software solutions for your business or personal needs.</h2>
+                <h2 style={{ color: secondaryColor, backgroundColor: 'white' }}><span style={{color: btnBackgroundColor, backgroundColor: 'white'}}></span>Software solutions for your business or personal needs.</h2>
             </div>
         </Col>
     </Row> 
@@ -218,37 +226,103 @@ export default function UserAuthentication() {
 <br/> 
 <Col xs={{span: 24}} md={{span: 0}} align="center">
                 {/* <img src={imgHome} style={{width :'90%', marginTop: '-30px'}} alt="Loading ..."/>   */}
-               
+               <br/>
                 <Carousel afterChange={()=>{}} autoplay={true} effect="fade" speed={600} pauseOnHover={false} dots={false}>
                 <div>
-      <img src={noteMaker} style={{height :'150px'}} alt="Loading ..."/>  
-      <br/>
-      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Mobile Applications</h2>
-      </div>
-      <div>
       <img src={diary} style={{height :'150px'}} alt="Loading ..."/>  
 
       <br/>
       <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Personal Website /<br/> Portfolio</h2>
       </div>
-      <div>
-      <img src={writer} style={{height :'150px'}} alt="Loading ..."/>  
-
+                <div>
+      <img src={noteMaker} style={{height :'150px'}} alt="Loading ..."/>  
       <br/>
-      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Digital Stock Register</h2>
+      <h2 style={{borderBottom: `0px solid ${btnBackgroundColor}`, paddingBottom: '10px'}}>Mobile Applications</h2>
       </div>
+      
     </Carousel>
-    <div align="left" style={{marginTop: '-15px', color: secondaryColor}}>
-        
-    </div>
+
 
             </Col>
 
+            <Col xs={{span: 24}} md={{span: 0}} align="center" style={{paddingTop: '30px', marginLeft: '0px'}}> 
+                       
+                <div align="left" style={{background: 'white', color: secondaryColor, padding: '20px', borderLeft: `0px solid ${secondaryColor}`, borderRight: `0px solid ${secondaryColor}`, opacity: '1'}} className="bounc">
+     <h1>Testimonials</h1>
+     <br/>
+     <div style={{fontSize: '18px', color: '#c71585' }}>
+                         <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp; 
+                         I am a designer and I needed a portfolio website <br/> ( www.archanadesign.com ) <br/>
+                         Bitsjoy helped me with finding the right domain name to making my portfolio online, it was a hassel free process.
+                         
+                         <div style={{color: 'grey', width: '100%'}} align="right"> 
+                         <br/>
+                    - Archana Das, Guwahati
+                    </div> 
+      </div>
+      </div>
+      </Col>
+
+            <Row style={{height: 'auto'}}>
+                <Col xs={{span: 0}} md={{span: 5}} align="center">
+      <img src={step0} style={{height :'150px', width: '65%'}} alt="Loading ..."/>  
+      <br/>
+      <br/>
+      <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>1</b></span>
+      &nbsp;
+      You order
+
+                </Col>
+                 
+                <Col xs={{span: 0}} md={{span: 5}} align="center">
+      <img src={step1} style={{height :'150px', width: '60%'}} alt="Loading ..."/> 
+      <br/>
+      <br/>
+      <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>2</b></span>
+      &nbsp;
+      We custom design it <br/>
+      for you
+                </Col>
+               
+                <Col xs={{span: 0}} md={{span: 5}} align="center">
+      <img src={step2} style={{height :'150px', width: '45%'}} alt="Loading ..."/>  
+      <br/>
+      <br/>
+      <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>3</b></span>
+      &nbsp;
+      We build it
+                </Col>
+               
+                <Col xs={{span: 0}} md={{span: 5}} align="center">
+      <img src={step3} style={{height :'150px', width: '60%'}} alt="Loading ..."/>  
+      <br/>
+      <br/>
+      <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>4</b></span>
+      &nbsp;
+      Delivery
+                </Col>
+
+                <Col xs={{span: 0}} md={{span: 4}} align="center">
+      <img src={step4} style={{height :'150px', width: '60%'}} alt="Loading ..."/> 
+      <br/>
+      <br/>
+      <span style={{color: 'white', padding: '5px 10px', borderRadius: '100%', backgroundColor: 'rgb(24, 144, 255)'}}><b>5</b></span>
+      &nbsp;
+      Customer support
+                </Col>
+                
+              
+            </Row>
+            <br/>
+            <br/> 
+
             <Row>
+                {/* 
                 <Col xs={{span: 0}} md={{span: 24}}>
-                    <div align="left" style={{marginTop: '-50px'}}>
-                    <div align="left" style={{color: secondaryColor, fontWeight: '700'}}>  
+                    <div align="center" style={{marginTop: '-50px'}}>
+                    <div align="center" style={{color: secondaryColor, fontWeight: '700'}}>  
                    </div> 
+                    
                        <br/>
                         <a href="#fa" onClick={(e)=>{
                             e.preventDefault();
@@ -257,14 +331,10 @@ export default function UserAuthentication() {
                         <a href="#fa" onClick={(e)=>{
                             e.preventDefault();
                             document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
-                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Portfolio website &nbsp; <LaptopOutlined /> <MobileOutlined /> </span></a>
+                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Website &nbsp; <LaptopOutlined /> <MobileOutlined /> </span></a>
                         
-                        <a href="#fa" onClick={(e)=>{
-                            e.preventDefault();
-                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
-                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Personal utility website &nbsp; <GlobalOutlined /></span></a>
-                         <br/>
-                        <br/>
+                  
+                         
                         
                         <a href="#fa" onClick={(e)=>{
                             e.preventDefault();
@@ -279,23 +349,18 @@ export default function UserAuthentication() {
                         <a href="#fa" onClick={(e)=>{
                             e.preventDefault();
                             document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
-                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}}>Desktop applications &nbsp; <WindowsFilled /> </span></a>
-                        
-                        <a href="#fa" onClick={(e)=>{
-                            e.preventDefault();
-                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
                         }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 20px', color: 'grey', marginRight: '10px'}} title="Search Engine Optimization">S.E.O. &nbsp; <GlobalOutlined /> </span></a> 
 
-<span onClick={(e)=>{
-                            e.preventDefault();
-                            document.getElementById('quotation').scrollIntoView({behavior: 'smooth'}, false);
-                        }}><span style={{fontWeight: '700', borderRadius: '3px', border: `0px solid ${btnBackgroundColor}`, padding: '10px 10px', color: 'grey', marginRight: '10px'}} title="Search Engine Optimization">and more ...</span></span>
-                    </div>
+         </div>
                     <br/>
                     <br/> 
+                    <br/>  
+                    <br/>  
+                    <br/>  
                     <br/> 
      
-                </Col>
+                </Col> */}
+          
 
                 <Col xs={{span: 0}} md={{span: 24}} align="center" style={{marginTop: '50px', marginLeft: '0px'}}> 
                         <div style={{ width: '100vw', paddingTop: '100px', marginLeft: '-20px', background: 'url(https://images.unsplash.com/photo-1637825891028-564f672aa42c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)', backgroundRepeat: 'no-repeat', backgroundPosition: 'right top', backgroundSize: '100%', backgroundAttachment: 'fixed'}}> 
@@ -303,22 +368,26 @@ export default function UserAuthentication() {
      <h1>Testimonials</h1>
      <br/>
      <div style={{fontSize: '19px', color: '#c71585' }}>
-                         <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp;
-                         For every minute spent organizing, an hour is earned.
+                         <img src={dq} style={{width: '50px', marginTop: '-10px'}} alt="''"/> &nbsp; &nbsp;
+                         I am a designer and I needed a portfolio website <br/> ( www.archanadesign.com ) <br/>
+                         Bitsjoy helped me with finding the right domain name to making my portfolio online, it was a hassel free process.
+                         
                          <div style={{color: 'grey', width: '100%'}} align="right"> 
                          <br/>
-                    - Benjamin Franklin</div>
+                    - Archana Das, Guwahati</div>
                     </div>
-<div id="quotation"></div>
 
      <br/>
     
       </div>
+      <div id="quotation"></div>
 
 <br/>
 <br/>
+
 <br/>
 <br/>
+
       
      <div align="right" style={{background: 'white', width: '50%', color: btnBackgroundColor, padding: '40px 40px', borderLeft: `11px solid ${btnBackgroundColor}`, borderRight: `0px solid ${btnBackgroundColor}`, opacity: '1', background: 'linear-gradient(to right, white, white, white, white)'}} className="bounc">
     
@@ -328,9 +397,12 @@ export default function UserAuthentication() {
      We reply within 24 hours 
      <br/>
      <br/>
+     <a href="https://forms.gle/unap3kkUsyS5YoU58"> 
+
      <span style={{padding: '10px 6px', border: `1px solid ${btnBackgroundColor}`}}>
      <ButtonPrimary className="bounce" text="Get quotation" styl={{backgroundColor: btnBackgroundColor}}></ButtonPrimary>
      </span>
+     </a>
      <br/>
      <br/> 
       </div>
@@ -366,8 +438,10 @@ export default function UserAuthentication() {
             </Col>
             
             <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={6}>
-            <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="www.alicebanting.com">
-                R.K. Minerals<br/> ( Stock Register )
+            <h3 style={{ border: '1px solid white', borderRadius: '4px', padding: '20px 20px', width: '80%'}}><a style={{color: 'white'}} target="client" href="https://alicebanting.com">
+                and counting 
+                <br />
+                . . .
                 </a></h3>
             </Col>
           </Row>
@@ -390,12 +464,16 @@ export default function UserAuthentication() {
      <br/>
      <h3 style={{color: 'silver'}}>Click on the button below to get quotation for your requirements.</h3>
      <br/> 
-     We reply with in 24 hours 
+     We reply within 24 hours 
      <br/>
      <br/>
+     <a href="https://forms.gle/unap3kkUsyS5YoU58"> 
+
      <span style={{padding: '10px 5px', border: `1px solid ${btnBackgroundColor}`}}>
      <ButtonPrimary className="bounce" text="Get quotation" styl={{backgroundColor: btnBackgroundColor}}></ButtonPrimary>
      </span>
+     </a>
+
      <br/>
      <br/>
      <br/>
@@ -426,9 +504,7 @@ export default function UserAuthentication() {
             </Col>
             
             <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
-            <h3 align="right" style={{ borderRight: '0px solid white', padding: '20px 20px', width: '70%'}}><a style={{color: 'white'}} target="client" href="www.alicebanting.com">
-                R.K. Minerals<br/> ( Stock Register )
-                </a></h3>
+            
             </Col>
             <Col align="center" style={{fontFamily: 'Cinzel', color: 'white'}} span={24}>
             <div align="left" style={{width: '70%', padding: '20px'}}>and counting . . .</div>
@@ -451,7 +527,7 @@ export default function UserAuthentication() {
                 <img src={enter} style={{width: '150px', display: 'inline'}} alt="enter" />
                 <br/>
                 <br/> */}
-                <span id="signinButtonDiv" style={{display: 'block', borderRadius: '0px', position: 'fixed', top: '16px', right: '95px', zIndex: '9999', background: 'blue'}}></span>
+                {/* <span id="signinButtonDiv" style={{display: 'block', borderRadius: '0px', position: 'fixed', top: '16px', right: '95px', zIndex: '9999', background: 'blue'}}></span> */}
             
  
 
